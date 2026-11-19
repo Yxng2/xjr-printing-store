@@ -3,750 +3,424 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>XJR PRINTING | Wear Your Brand</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>XJR PRINTING</title>
 <style>
-:root{
---orange:#ff7800;
---black:#111;
---white:#fff;
---gray:#f5f5f5;
---muted:#777;
-}
 *{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
-body{font-family:Arial,Helvetica,sans-serif;color:var(--black);background:white}
-button,input,textarea,select{font:inherit}
+body{font-family:Arial,sans-serif;color:#151515;background:#fff}
+button,input,select,textarea{font:inherit}
 button{cursor:pointer}
 a{text-decoration:none;color:inherit}
-img{max-width:100%}
-
-.announcement{
-background:#111;color:#fff;text-align:center;padding:9px;
-font-size:10px;letter-spacing:1.8px;text-transform:uppercase
-}
-header{
-display:flex;align-items:center;justify-content:space-between;
-padding:18px 5%;background:white;position:sticky;top:0;
-z-index:20;border-bottom:1px solid #eee
-}
-.logo{font-size:25px;font-weight:900;letter-spacing:-1px;cursor:pointer}
-.logo small{display:block;font-size:8px;letter-spacing:4px;text-align:center}
-nav{display:flex;gap:18px;align-items:center}
-nav a{font-size:11px;font-weight:bold;text-transform:uppercase}
-.nav-buttons{display:flex;gap:10px;align-items:center}
-.nav-buttons button{border:0;background:none;font-size:16px;padding:5px}
-.mobile-menu{display:none}
-
-.hero{
-position:relative;min-height:520px;background:#171717;color:white;
-overflow:hidden;display:flex;align-items:center;padding:50px 7%
-}
-.hero-bg{
-position:absolute;inset:0;background-size:cover;background-position:center;
-background-image:linear-gradient(90deg,#111 0%,#111e 48%,#1113 100%),
-url('https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=1600&q=85');
-}
-.hero-content{position:relative;z-index:2;max-width:650px}
-.hero-label{font-size:11px;letter-spacing:3px;color:#ff9b46;margin-bottom:22px}
-.hero h1{font-size:clamp(43px,8vw,86px);font-weight:900;line-height:.98;letter-spacing:-3px}
+:root{--blue:#23458f;--blue2:#315bc1;--orange:#ff7900;--gray:#f4f5f8}
+.announce{background:#111;color:white;text-align:center;padding:9px;font-size:10px;letter-spacing:1px}
+header{padding:18px 5%;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;background:white;z-index:5;border-bottom:1px solid #eee}
+.logo{font-weight:900;font-size:24px;cursor:pointer}
+.logo small{display:block;text-align:center;font-size:8px;letter-spacing:4px}
+nav{display:flex;gap:20px}
+nav a{font-size:11px;text-transform:uppercase;font-weight:bold}
+.hero{background:#111;color:white;padding:65px 7%;min-height:480px;position:relative;background-image:linear-gradient(90deg,#111 10%,#111c 60%,#1113),url('https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=1500&q=85');background-position:center;background-size:cover}
+.hero h1{font-size:clamp(40px,8vw,85px);line-height:.98;letter-spacing:-3px}
 .hero h1 span{color:var(--orange)}
-.hero p{max-width:440px;font-size:14px;line-height:1.7;color:#ddd;margin-top:20px}
-.hero-buttons{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px}
-.button{
-display:inline-flex;align-items:center;justify-content:center;
-padding:15px 22px;background:var(--orange);color:#111;
-border:1px solid var(--orange);font-size:11px;font-weight:bold;
-text-transform:uppercase;letter-spacing:1px
-}
-.button.secondary{background:transparent;color:white;border-color:white}
-.button.black{background:#111;color:white;border-color:#111}
-.button.white{background:white;color:black;border-color:white}
+.hero p{max-width:450px;line-height:1.7;color:#ddd;margin-top:20px;font-size:14px}
+.btn{padding:13px 18px;background:var(--orange);border:0;font-weight:bold;font-size:11px;text-transform:uppercase;display:inline-block;margin-top:20px}
+.btn.black{background:#111;color:white}
+.section{padding:55px 5%}
+.section h2{font-size:30px;margin-bottom:25px}
+.categories,.products{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.category{position:relative;cursor:pointer}
+.category img{width:100%;height:240px;object-fit:cover;background:#eee}
+.category div{padding:12px;background:#f5f5f5;font-weight:bold;font-size:12px}
+.product img{width:100%;height:280px;object-fit:cover;background:#eee}
+.product h3{font-size:13px;margin:8px 0}
+.product p{font-weight:bold}
+.product button{width:100%;background:#111;color:white;border:0;padding:12px;margin-top:10px}
+.products{margin-top:20px}
+.custom{background:#111;color:white;padding:50px 7%;display:flex;justify-content:space-between;gap:25px;align-items:center}
+.custom h2{font-size:40px;margin-bottom:15px}
+.custom p{max-width:500px;color:#ccc;line-height:1.7}
+footer{background:#111;color:white;padding:40px 5%}
+footer p{color:#aaa;font-size:12px;margin-top:10px}
+.floatwa{position:fixed;bottom:20px;right:20px;width:58px;height:58px;border-radius:50%;background:#25d366;display:flex;align-items:center;justify-content:center;z-index:9}
+.floatwa img{width:34px}
 
-.benefits{
-display:grid;grid-template-columns:repeat(4,1fr);
-border-bottom:1px solid #eee;padding:26px 5%
-}
-.benefit{text-align:center;padding:8px 12px;border-right:1px solid #eee}
-.benefit:last-child{border:0}
-.benefit strong{display:block;font-size:10px;letter-spacing:1px;text-transform:uppercase}
-.benefit p{font-size:10px;color:#777;margin-top:6px;line-height:1.5}
+/* MODALS */
+.modal{display:none;position:fixed;inset:0;background:#0008;z-index:30;overflow:auto;padding:15px}
+.modalbox{background:white;max-width:650px;margin:30px auto;padding:25px}
+.close{float:right;background:none;border:0;font-size:28px}
+.modalbox input,.modalbox select,.modalbox textarea{width:100%;padding:12px;border:1px solid #ddd;margin:7px 0}
+.modalbox textarea{min-height:80px}
+.adminbtns{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:20px 0}
+.adminbtns button{background:#111;color:white;padding:12px;border:0;font-weight:bold;font-size:11px}
+.adminbtns button:hover{background:var(--blue2)}
+.adminbox{border:1px solid #ddd;padding:18px;margin:20px 0}
+.adminbox h3{margin-bottom:12px}
+.adminbox button{background:#111;color:white;border:0;padding:10px;margin:4px}
+.orderitem{border:1px solid #ddd;padding:14px;margin:12px 0}
+.orderitem button{background:#111;color:white;border:0;padding:8px;margin:5px 2px}
+.preview{max-width:100%;max-height:220px;object-fit:contain;margin:10px}
 
-.section{padding:65px 5%}
-.section-head{display:flex;justify-content:space-between;align-items:end;margin-bottom:28px;gap:20px}
-.eyebrow{font-size:10px;letter-spacing:3px;color:#777;margin-bottom:10px}
-.section-head h2{font-size:clamp(25px,4vw,40px);font-weight:900;letter-spacing:-1px}
-.section-head a{font-size:11px;text-transform:uppercase;border-bottom:1px solid #111;padding-bottom:5px}
-
-.categories{
-display:grid;grid-template-columns:repeat(4,1fr);gap:15px
-}
-.category-card{position:relative;background:#eee;overflow:hidden;cursor:pointer}
-.category-card img{width:100%;height:270px;object-fit:cover;display:block;transition:transform .5s}
-.category-card:hover img{transform:scale(1.05)}
-.category-card .cat-name{
-position:absolute;bottom:0;left:0;right:0;background:white;
-padding:14px;font-size:12px;font-weight:bold;text-transform:uppercase;
-display:flex;justify-content:space-between;align-items:center
-}
-.category-card .cat-name span{font-size:18px}
-
-.shop-tools{
-display:flex;flex-wrap:wrap;gap:10px;justify-content:space-between;
-align-items:center;margin-bottom:25px
-}
-.filters{display:flex;gap:8px;flex-wrap:wrap}
-.filter{
-background:white;border:1px solid #ddd;padding:10px 14px;
-font-size:10px;text-transform:uppercase
-}
-.filter.active{background:#111;color:white;border-color:#111}
-.search-box{border:1px solid #ddd;padding:10px 12px;min-width:160px}
-.products{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
-.product{min-width:0}
-.product-image{
-position:relative;background:#f3f3f3;aspect-ratio:3/4;
-overflow:hidden
-}
-.product-image img{width:100%;height:100%;object-fit:cover;display:block}
-.product-image .placeholder{
-height:100%;display:flex;align-items:center;justify-content:center;
-font-size:35px;font-weight:900;color:#222
-}
-.product-tag{
-position:absolute;top:10px;left:10px;background:white;
-padding:7px;font-size:9px;letter-spacing:1px
-}
-.product-info{padding:12px 2px}
-.product-info .small{font-size:9px;color:#777;text-transform:uppercase;letter-spacing:1px}
-.product-info h3{font-size:13px;margin:6px 0}
-.price{font-size:13px;font-weight:bold}
-.product-info button{
-width:100%;margin-top:12px;background:#111;color:white;
-border:0;padding:12px;font-size:10px;font-weight:bold;text-transform:uppercase
-}
-.product-info button:hover{background:var(--orange);color:black}
-
-.custom-banner{
-background:#111;color:white;display:grid;grid-template-columns:1fr 1fr;
-min-height:360px
-}
-.custom-banner .custom-text{padding:55px 8%;display:flex;flex-direction:column;justify-content:center}
-.custom-banner h2{font-size:clamp(30px,5vw,55px);line-height:1.05;margin:15px 0}
-.custom-banner p{font-size:13px;line-height:1.7;color:#ccc;max-width:400px}
-.custom-banner img{width:100%;height:100%;min-height:360px;object-fit:cover}
-.orange{color:var(--orange)}
-
-.tabs{display:flex;gap:20px;margin-bottom:25px}
-.tabs button{border:0;background:white;color:#777;font-size:11px}
-.tabs button.active{color:#111;border-bottom:1px solid;padding-bottom:8px}
-
-.contact-section{background:#f5f5f5;text-align:center;padding:60px 5%}
-.contact-section h2{font-size:35px;margin:15px 0}
-.contact-section p{font-size:13px;color:#666;line-height:1.7;margin-bottom:25px}
-
-footer{background:#111;color:white;padding:50px 5%}
-.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr;gap:30px}
-footer h3{font-size:20px;margin-bottom:15px}
-footer h4{font-size:11px;letter-spacing:1px;margin-bottom:15px}
-footer p,footer a{font-size:12px;color:#bbb;line-height:2}
-footer a{display:block}
-.copyright{border-top:1px solid #333;margin-top:30px;padding-top:20px;font-size:10px;color:#888}
-
-.whatsapp-float{
-position:fixed;right:20px;bottom:24px;width:60px;height:60px;
-border-radius:50%;background:#25D366;display:flex;align-items:center;
-justify-content:center;box-shadow:0 4px 18px #0004;z-index:1000
-}
-.whatsapp-float img{width:35px;height:35px}
-
-.modal{position:fixed;inset:0;background:#0009;z-index:100;display:none;overflow:auto;padding:15px}
-.modal-inner{background:white;max-width:800px;margin:25px auto;padding:25px}
-.close{float:right;border:0;background:white;font-size:27px}
-.modal-inner h2{margin-bottom:20px}
-.modal-inner input,.modal-inner textarea,.modal-inner select{
-width:100%;padding:12px;margin:7px 0;border:1px solid #ddd
-}
-.modal-inner textarea{min-height:80px}
-.admin-shortcuts{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:20px 0}
-.admin-shortcuts button{background:#111;color:white;padding:13px 5px;border:0;font-size:11px;font-weight:bold}
-.admin-box{padding:20px;border:1px solid #eee;margin:20px 0}
-.admin-box button{padding:11px;background:#111;color:white;border:0;margin:5px 2px}
-.admin-box h3{margin-bottom:15px}
-.upload-label{display:block;background:#f3f3f3;padding:15px;margin:10px 0}
-.order-item{border:1px solid #ddd;padding:15px;margin:10px 0;overflow-wrap:anywhere}
+/* ADMIN */
+#adminModal{padding:0;background:#f3f5f9}
+.adminlayout{min-height:100vh;display:grid;grid-template-columns:230px 1fr}
+.sidebar{background:var(--blue);color:white;padding:20px 12px;min-height:100vh}
+.sidebrand{font-size:22px;font-weight:900;padding:10px 14px 30px}
+.sidebrand small{display:block;font-size:10px;letter-spacing:2px}
+.sideitem{display:block;padding:14px 15px;margin:5px 0;border-radius:5px;color:white;background:transparent;border:0;width:100%;text-align:left;font-size:14px}
+.sideitem:hover,.sideitem.active{background:var(--blue2)}
+.adminmain{padding:25px;min-width:0}
+.adminheader{display:flex;justify-content:space-between;align-items:center;margin-bottom:25px;gap:12px}
+.adminheader h2{font-size:26px}
+.adminheader p{color:#777;font-size:13px;margin-top:6px}
+.adminheader button{background:#111;color:white;padding:10px;border:0}
+.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin:20px 0}
+.stat{background:white;border:1px solid #e4e6ed;border-radius:9px;padding:18px;box-shadow:0 2px 5px #00000005}
+.stat .label{color:#777;font-size:12px;font-weight:bold}
+.stat .value{font-size:26px;font-weight:bold;margin-top:8px;overflow-wrap:anywhere}
+.stat .sub{font-size:11px;color:#777;margin-top:8px}
+.stat.blue .value{color:var(--blue2)}
+.stat.green .value{color:#16934a}
+.stat.orange .value{color:#d98600}
+.stat.red .value{color:#d32f2f}
+.panel{background:white;border:1px solid #e3e5eb;border-radius:9px;margin:20px 0;padding:18px;overflow:hidden}
+.panelhead{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:15px}
+.panelhead h3{font-size:18px}
+.panelhead input,.panelhead select{padding:10px;border:1px solid #ddd}
+.tablewrap{overflow-x:auto}
+table{width:100%;border-collapse:collapse;min-width:760px}
+th,td{text-align:left;padding:13px;border-bottom:1px solid #eee;font-size:12px}
+th{background:#e9eefb;font-size:11px;text-transform:uppercase;color:#333}
+.status{padding:6px 9px;border-radius:4px;font-size:10px;font-weight:bold;display:inline-block}
+.pending{background:#fff0c9;color:#926500}
+.processing{background:#e7dfff;color:#5d36a2}
+.transit{background:#dce6ff;color:#23458f}
+.delivered{background:#d5f4df;color:#087d35}
+.cancelled{background:#ffe0e0;color:#a20000}
+.analyticsgrid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.barrow{margin:12px 0}
+.barlabel{display:flex;justify-content:space-between;font-size:12px;margin-bottom:5px}
+.bar{height:10px;background:#eee;border-radius:10px;overflow:hidden}
+.bar span{display:block;height:100%;background:var(--blue2)}
 .hidden{display:none!important}
-.empty{text-align:center;padding:40px;color:#777}
-@media(max-width:750px){
+.adminsection{scroll-margin-top:20px}
+.sidebar-close{display:none}
+@media(max-width:850px){
+.adminlayout{grid-template-columns:1fr}
+.sidebar{min-height:auto;padding:10px;display:flex;flex-wrap:wrap;align-items:center;gap:4px}
+.sidebrand{padding:10px}
+.sideitem{width:auto;padding:11px;font-size:12px}
+.adminmain{padding:15px}
+.cards{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:550px){
 header{padding:14px 4%}
 nav{gap:10px}
 nav a{font-size:9px}
-.logo{font-size:21px}
-.hero{min-height:460px;padding:45px 6%}
-.hero h1{letter-spacing:-2px}
-.benefits{grid-template-columns:repeat(2,1fr);gap:10px}
-.benefit:nth-child(2){border-right:0}
-.categories{grid-template-columns:repeat(2,1fr);gap:10px}
-.category-card img{height:220px}
-.products{grid-template-columns:repeat(2,1fr);gap:12px}
-.section{padding:45px 4%}
-.custom-banner{grid-template-columns:1fr}
-.custom-banner img{min-height:230px;max-height:350px}
-.footer-grid{grid-template-columns:1fr 1fr}
-.footer-grid>div:first-child{grid-column:1/-1}
-}
-@media(max-width:380px){
-nav a{display:none}
-.hero h1{font-size:43px}
-.category-card img{height:190px}
+.hero{padding:50px 5%;min-height:420px}
+.categories,.products{grid-template-columns:repeat(2,1fr);gap:10px}
+.category img{height:180px}
+.product img{height:220px}
+.section{padding:40px 4%}
+.custom{display:block}
+.custom h2{font-size:34px}
+.cards{grid-template-columns:repeat(2,1fr);gap:8px}
+.stat{padding:12px}
+.stat .value{font-size:21px}
+.adminheader h2{font-size:21px}
+.adminmain{padding:10px}
+.analyticsgrid{grid-template-columns:1fr}
 }
 </style>
 </head>
 <body>
-
-<div class="announcement">Nationwide delivery · Custom printing · Wear your identity</div>
-
+<div class="announce">NATIONWIDE DELIVERY · CUSTOM PRINTING · WEAR YOUR IDENTITY</div>
 <header>
-<div class="logo" id="secretLogo">
-XJR.
-<small>PRINTING</small>
-</div>
-
+<div class="logo" id="secretLogo">XJR.<small>PRINTING</small></div>
 <nav>
-<a href="#home">Home</a>
-<a href="#shop">Shop</a>
-<a href="#categories">Categories</a>
-<a href="#custom">Custom Design</a>
-<a href="#about">About</a>
+<a href="#home">Home</a><a href="#categories">Categories</a><a href="#shop">Shop</a><a href="#custom">Custom</a>
 </nav>
-
-<div class="nav-buttons">
-<button onclick="openCart()">♧ <span id="cartCount">0</span></button>
-</div>
+<button onclick="openCart()" style="border:0;background:white">CART (<span id="cartCount">0</span>)</button>
 </header>
 
 <section class="hero" id="home">
-<div class="hero-bg"></div>
-<div class="hero-content">
-<div class="hero-label">YOUR STYLE. YOUR IDENTITY.</div>
+<p style="color:var(--orange);letter-spacing:3px;font-size:11px">YOUR STYLE. YOUR IDENTITY.</p>
 <h1>WEAR YOUR<br>BRAND. DEFINE<br>YOUR <span>STYLE.</span></h1>
 <p>Premium clothing. Exceptional prints. From everyday essentials to custom creations — make it yours.</p>
-<div class="hero-buttons">
-<a href="#shop" class="button">Shop the Collection ↗</a>
-<a href="#custom" class="button secondary">Design Your Own →</a>
-</div>
-</div>
-</section>
-
-<section class="benefits">
-<div class="benefit"><strong>♧ Nationwide Delivery</strong><p>From our studio to your doorstep</p></div>
-<div class="benefit"><strong>Premium Quality</strong><p>Great fabric. Better feel.</p></div>
-<div class="benefit"><strong>Make It Personal</strong><p>Your ideas, expertly printed</p></div>
-<div class="benefit"><strong>Order With Confidence</strong><p>Real people. Personal support.</p></div>
+<a class="btn" href="#shop">SHOP THE COLLECTION ↗</a>
+<a class="btn black" href="#custom">DESIGN YOUR OWN →</a>
 </section>
 
 <section class="section" id="categories">
-<div class="section-head">
-<div>
-<div class="eyebrow">FIND YOUR EVERYDAY</div>
 <h2>Shop by Category</h2>
-</div>
-<a href="#shop">Explore Categories ↗</a>
-</div>
-
 <div class="categories">
-<div class="category-card" onclick="setCategory('T-Shirts')">
-<img src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=700&q=80" alt="T-shirts">
-<div class="cat-name">Round Neck T-Shirts <span>↗</span></div>
-</div>
-<div class="category-card" onclick="setCategory('Oversized')">
-<img src="https://images.unsplash.com/photo-1503341504253-dff4815485f1?auto=format&fit=crop&w=700&q=80" alt="Oversized">
-<div class="cat-name">Oversized Tees <span>↗</span></div>
-</div>
-<div class="category-card" onclick="setCategory('Polos')">
-<img src="https://images.unsplash.com/photo-1625910513413-5fc2e7e1d0a8?auto=format&fit=crop&w=700&q=80" alt="Polo shirts">
-<div class="cat-name">Polo Shirts <span>↗</span></div>
-</div>
-<div class="category-card" onclick="setCategory('Hoodies')">
-<img src="https://images.unsplash.com/photo-1556821840-3a63f95609a7?auto=format&fit=crop&w=700&q=80" alt="Hoodies">
-<div class="cat-name">Hoodies <span>↗</span></div>
-</div>
+<div class="category" onclick="filterCategory('T-Shirts')"><img src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=600&q=80"><div>T-Shirts ↗</div></div>
+<div class="category" onclick="filterCategory('Oversized')"><img src="https://images.unsplash.com/photo-1503341504253-dff4815485f1?auto=format&fit=crop&w=600&q=80"><div>Oversized ↗</div></div>
+<div class="category" onclick="filterCategory('Polos')"><img src="https://images.unsplash.com/photo-1625910513413-5fc2e7e1d0a8?auto=format&fit=crop&w=600&q=80"><div>Polo Shirts ↗</div></div>
+<div class="category" onclick="filterCategory('Hoodies')"><img src="https://images.unsplash.com/photo-1556821840-3a63f95609a7?auto=format&fit=crop&w=600&q=80"><div>Hoodies ↗</div></div>
 </div>
 </section>
 
 <section class="section" id="shop">
-<div class="section-head">
-<div>
-<div class="eyebrow">THE PIECES YOU'LL REACH FOR</div>
 <h2>Everyday. Anything but ordinary.</h2>
+<div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:20px">
+<select id="shopFilter" onchange="renderProducts()" style="padding:10px;border:1px solid #ddd">
+<option value="All">All Products</option><option>T-Shirts</option><option>Oversized</option><option>Polos</option><option>Hoodies</option><option>Custom</option><option>Other</option>
+</select>
+<input id="search" placeholder="Search products" oninput="renderProducts()" style="padding:10px;border:1px solid #ddd">
 </div>
-</div>
-
-<div class="shop-tools">
-<div class="filters" id="filters">
-<button class="filter active" onclick="setCategory('All',this)">All</button>
-<button class="filter" onclick="setCategory('T-Shirts',this)">T-Shirts</button>
-<button class="filter" onclick="setCategory('Oversized',this)">Oversized</button>
-<button class="filter" onclick="setCategory('Polos',this)">Polos</button>
-<button class="filter" onclick="setCategory('Hoodies',this)">Hoodies</button>
-<button class="filter" onclick="setCategory('Custom',this)">Custom</button>
-</div>
-<input class="search-box" id="searchBox" placeholder="Search products..." oninput="renderProducts()">
-</div>
-
-<div class="tabs">
-<button class="active" onclick="setTab('Featured',this)">Featured</button>
-<button onclick="setTab('New Arrivals',this)">New Arrivals</button>
-<button onclick="setTab('Best Sellers',this)">Best Sellers</button>
-</div>
-
 <div class="products" id="productList"></div>
 </section>
 
-<section class="custom-banner" id="custom">
-<div class="custom-text">
-<div class="eyebrow orange">MAKE IT PERSONAL</div>
-<h2>YOUR IDEA.<br>YOUR DESIGN.</h2>
-<p>Bring your vision to life. Personalised T-shirts, branded apparel, event clothing and custom printing made just for you.</p>
-<div style="margin-top:25px">
-<a class="button" href="https://wa.me/2347015119367?text=Hello%20XJR%20PRINTING%2C%20I%20want%20to%20make%20a%20custom%20design." target="_blank">Start Your Design →</a>
-</div>
-</div>
-<img src="https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&fit=crop&w=1200&q=85" alt="Fashion">
-</section>
-
-<section class="section" id="about">
-<div class="section-head">
-<div>
-<div class="eyebrow">THE XJR DIFFERENCE</div>
-<h2>Built for comfort.<br>Made to stand out.</h2>
-</div>
-</div>
-<p style="max-width:650px;line-height:1.8;font-size:14px;color:#666">
-XJR PRINTING brings fashion, creativity and personal expression together. From everyday clothing to custom prints and brand merchandise, we help you wear what represents you.
-</p>
+<section class="custom" id="custom">
+<div><h2>YOUR IDEA.<br>YOUR DESIGN.</h2>
+<p>Personalised clothing, branded apparel and custom prints made just for you.</p>
+<a class="btn" href="https://wa.me/2347015119367?text=Hello%20XJR%20PRINTING%2C%20I%20want%20a%20custom%20design">START YOUR DESIGN ↗</a></div>
 </section>
 
 <section class="section">
-<h2>TRACK YOUR ORDER</h2>
-<input id="trackInput" placeholder="Enter your order number" style="padding:13px;width:100%;margin:15px 0;border:1px solid #ddd">
-<button class="button black" onclick="trackOrder()">Track Order</button>
-<div id="trackResult" style="margin-top:15px"></div>
+<h2>Track your order</h2>
+<input id="trackInput" placeholder="Enter order ID" style="padding:12px;width:100%;border:1px solid #ddd">
+<button class="btn black" onclick="trackOrder()">TRACK ORDER</button>
+<div id="trackResult"></div>
 </section>
-
-<section class="contact-section">
-<div class="eyebrow">WE'RE HERE FOR YOU</div>
-<h2>Let's create something.</h2>
-<p>Questions, custom orders or collaborations?<br>Talk directly with XJR PRINTING.</p>
-<a class="button" href="https://wa.me/2347015119367" target="_blank">Contact Us on WhatsApp</a>
-</section>
-
-<footer>
-<div class="footer-grid">
-<div>
-<h3>XJR. PRINTING</h3>
-<p>Wear your brand. Define your style.</p>
-<p>Fashion, custom apparel and printing.</p>
-</div>
-<div>
-<h4>SHOP</h4>
-<a href="#shop">All Products</a>
-<a href="#categories">Categories</a>
-<a href="#custom">Custom Design</a>
-</div>
-<div>
-<h4>CONTACT</h4>
-<a href="https://wa.me/2347015119367">WhatsApp</a>
-<p>Nigeria · Nationwide delivery</p>
-</div>
-</div>
-<div class="copyright">© 2026 XJR PRINTING. All rights reserved.</div>
-</footer>
-
-<a class="whatsapp-float" href="https://wa.me/2347015119367" target="_blank" aria-label="WhatsApp">
-<img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp">
-</a>
+<footer><h2>XJR PRINTING</h2><p>Wear your brand. Define your style.</p><p>Orders and enquiries via WhatsApp.</p><p><a href="https://wa.me/2347015119367">CHAT WITH US</a></p><p>© 2026 XJR PRINTING</p></footer>
+<a class="floatwa" href="https://wa.me/2347015119367" target="_blank"><img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg"></a>
 
 <!-- CART -->
-<div class="modal" id="cartModal">
-<div class="modal-inner">
-<button class="close" onclick="closeModal('cartModal')">×</button>
-<h2>YOUR CART</h2>
-<div id="cartItems"></div>
-<p id="cartTotal" style="margin:20px 0;font-weight:bold"></p>
-<input id="customerName" placeholder="Your full name">
-<input id="customerPhone" placeholder="Your phone number">
-<textarea id="customerAddress" placeholder="Delivery address"></textarea>
-<textarea id="customerNote" placeholder="Order note (optional)"></textarea>
-<button class="button black" onclick="checkout()" style="width:100%">ORDER VIA WHATSAPP</button>
-</div>
-</div>
+<div class="modal" id="cartModal"><div class="modalbox">
+<button class="close" onclick="closeModal('cartModal')">×</button><h2>YOUR CART</h2>
+<div id="cartItems"></div><h3 id="cartTotal" style="margin:15px 0"></h3>
+<input id="custName" placeholder="Full name"><input id="custPhone" placeholder="Phone number">
+<textarea id="custAddress" placeholder="Delivery address"></textarea><textarea id="custNote" placeholder="Order note"></textarea>
+<button class="btn black" onclick="checkout()" style="width:100%">ORDER VIA WHATSAPP</button>
+</div></div>
 
 <!-- ADMIN -->
 <div class="modal" id="adminModal">
-<div class="modal-inner">
-<button class="close" onclick="closeModal('adminModal')">×</button>
-<h2>ADMIN DASHBOARD</h2>
-<div class="admin-shortcuts">
-<button onclick="jumpAdmin('addSection')">ADD PRODUCT</button>
-<button onclick="jumpAdmin('ordersSection')">CHECK ORDERS</button>
-<button onclick="jumpAdmin('editSection')">EDIT PRODUCTS</button>
+<div class="adminlayout">
+<aside class="sidebar">
+<div class="sidebrand">XJR PRINTING<small>STORE ADMIN</small></div>
+<button class="sideitem active" onclick="showAdmin('dash')">▦ Dashboard</button>
+<button class="sideitem" onclick="showAdmin('orders')">▣ Orders</button>
+<button class="sideitem" onclick="showAdmin('productsAdmin')">▤ Products</button>
+<button class="sideitem" onclick="showAdmin('analytics')">▥ Analytics</button>
+<button class="sideitem" onclick="showAdmin('customers')">♙ Customers</button>
+<button class="sideitem" onclick="showAdmin('reports')">▧ Reports</button>
+<button class="sideitem" onclick="closeModal('adminModal')">↗ View Store</button>
+</aside>
+<main class="adminmain">
+<div class="adminheader"><div><h2 id="adminTitle">Dashboard</h2><p>Overview of your clothing store</p></div><button onclick="closeModal('adminModal')">✕</button></div>
+
+<div id="dash" class="adminsection">
+<div class="cards">
+<div class="stat blue"><div class="label">TOTAL ORDERS</div><div class="value" id="totalOrders">0</div><div class="sub">All orders</div></div>
+<div class="stat orange"><div class="label">PENDING ORDERS</div><div class="value" id="pendingOrders">0</div><div class="sub">Awaiting fulfilment</div></div>
+<div class="stat green"><div class="label">DELIVERED</div><div class="value" id="deliveredOrders">0</div><div class="sub">Completed orders</div></div>
+<div class="stat red"><div class="label">CANCELLED</div><div class="value" id="cancelledOrders">0</div><div class="sub">Cancelled orders</div></div>
+<div class="stat green"><div class="label">PROFIT MADE</div><div class="value" id="profitMade">₦0</div><div class="sub">Delivered orders only</div></div>
+<div class="stat blue"><div class="label">DELIVERED SALES</div><div class="value" id="deliveredSales">₦0</div><div class="sub">Delivered order value</div></div>
+<div class="stat orange"><div class="label">TOTAL PRODUCTS</div><div class="value" id="totalProducts">0</div><div class="sub">Products listed</div></div>
+<div class="stat blue"><div class="label">CUSTOMERS</div><div class="value" id="totalCustomers">0</div><div class="sub">Unique customers</div></div>
 </div>
 
-<div class="admin-box" id="addSection">
-<h3>ADD PRODUCT</h3>
+<div class="adminbtns">
+<button onclick="jumpTo('addSection')">＋ ADD PRODUCT</button>
+<button onclick="jumpTo('ordersTable')">▣ CHECK ORDERS</button>
+<button onclick="jumpTo('editSection')">✎ EDIT PRODUCTS</button>
+</div>
+
+<div class="panel adminsection" id="ordersTable">
+<div class="panelhead"><h3>Recent Orders</h3><input id="dashSearch" placeholder="Search order/customer" oninput="renderOrders()"></div>
+<div class="tablewrap"><table><thead><tr><th>Order ID</th><th>Customer</th><th>Items</th><th>Amount</th><th>Status</th><th>Date</th><th>Action</th></tr></thead><tbody id="ordersBody"></tbody></table></div>
+</div>
+</div>
+
+<div id="orders" class="adminsection hidden">
+<div class="panel">
+<div class="panelhead"><h3>All Orders</h3><div><input id="orderSearch" placeholder="Search orders" oninput="renderOrders()"><select id="orderFilter" onchange="renderOrders()"><option value="All">All statuses</option><option>Pending</option><option>Processing</option><option>In Transit</option><option>Delivered</option><option>Cancelled</option></select></div></div>
+<div class="tablewrap"><table><thead><tr><th>Order ID</th><th>Customer</th><th>Items</th><th>Amount</th><th>Profit</th><th>Status</th><th>Date</th><th>Action</th></tr></thead><tbody id="ordersBody2"></tbody></table></div>
+</div>
+</div>
+
+<div id="productsAdmin" class="adminsection hidden">
+<div class="adminbtns"><button onclick="jumpTo('addSection')">＋ ADD PRODUCT</button><button onclick="jumpTo('editSection')">✎ EDIT PRODUCTS</button></div>
+<div class="adminbox" id="addSection"><h3>ADD PRODUCT</h3>
 <input id="newName" placeholder="Product name">
-<input id="newPrice" type="number" placeholder="Price in NGN">
-<select id="newCategory">
-<option value="T-Shirts">T-Shirts</option>
-<option value="Oversized">Oversized</option>
-<option value="Polos">Polos</option>
-<option value="Hoodies">Hoodies</option>
-<option value="Custom">Custom</option>
-<option value="Other">Other</option>
-</select>
-<textarea id="newDescription" placeholder="Product description"></textarea>
-<label class="upload-label">
-<strong>UPLOAD PRODUCT IMAGE FROM PHONE</strong>
-<input id="newImageFile" type="file" accept="image/*" style="display:block;width:100%;margin-top:15px">
-</label>
+<input id="newPrice" type="number" placeholder="Selling price (₦)">
+<input id="newCost" type="number" placeholder="Production cost (₦)">
+<select id="newCategory"><option>T-Shirts</option><option>Oversized</option><option>Polos</option><option>Hoodies</option><option>Custom</option><option>Other</option></select>
+<textarea id="newDesc" placeholder="Description"></textarea>
+<input id="newFile" type="file" accept="image/*">
 <div id="imagePreview"></div>
 <button onclick="addProduct()">SAVE PRODUCT</button>
 </div>
-
-<div class="admin-box" id="editSection">
-<h3>EDIT PRODUCTS</h3>
-<div id="adminProducts"></div>
+<div class="adminbox" id="editSection"><h3>EDIT PRODUCTS</h3><div id="adminProducts"></div></div>
 </div>
 
-<div class="admin-box" id="ordersSection">
-<h3>ORDERS</h3>
-<div id="adminOrders"></div>
+<div id="analytics" class="adminsection hidden">
+<div class="cards">
+<div class="stat green"><div class="label">REALIZED PROFIT</div><div class="value" id="analyticProfit">₦0</div></div>
+<div class="stat blue"><div class="label">DELIVERED SALES</div><div class="value" id="analyticSales">₦0</div></div>
+<div class="stat orange"><div class="label">DELIVERED ORDERS</div><div class="value" id="analyticDelivered">0</div></div>
+<div class="stat blue"><div class="label">AVERAGE ORDER</div><div class="value" id="analyticAverage">₦0</div></div>
 </div>
+<div class="panel"><h3>Order Status Breakdown</h3><div id="statusChart"></div></div>
+<div class="panel"><h3>Profit Breakdown</h3><p id="profitBreakdown"></p></div>
+</div>
+
+<div id="customers" class="adminsection hidden">
+<div class="panel"><h3>Customers</h3><div class="tablewrap"><table><thead><tr><th>Name</th><th>Phone</th><th>Orders</th><th>Delivered</th><th>Total Order Value</th></tr></thead><tbody id="customersBody"></tbody></table></div></div>
+</div>
+
+<div id="reports" class="adminsection hidden">
+<div class="panel"><h3>Store Report</h3><div id="reportContent"></div><button onclick="downloadReport()">DOWNLOAD REPORT</button></div>
+</div>
+
+</main>
 </div>
 </div>
 
 <script>
 const WA="2347015119367";
-let categoryFilter="All";
-let currentTab="Featured";
-
 let products=JSON.parse(localStorage.getItem("xjr_products")||"null")||[
-{id:1,name:"The Essential Tee",price:8500,category:"T-Shirts",image:"https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=700&q=80",description:"Classic everyday T-shirt",featured:true},
-{id:2,name:"Everyday Oversized Tee",price:12000,category:"Oversized",image:"https://images.unsplash.com/photo-1503341504253-dff4815485f1?auto=format&fit=crop&w=700&q=80",description:"Relaxed oversized fit",featured:true},
-{id:3,name:"The Classic Polo",price:14500,category:"Polos",image:"https://images.unsplash.com/photo-1625910513413-5fc2e7e1d0a8?auto=format&fit=crop&w=700&q=80",description:"Smart classic polo",featured:true},
-{id:4,name:"Heavyweight Hoodie",price:28000,category:"Hoodies",image:"https://images.unsplash.com/photo-1556821840-3a63f95609a7?auto=format&fit=crop&w=700&q=80",description:"Comfortable heavyweight hoodie",featured:true}
+{id:1,name:"The Essential Tee",price:8500,cost:5000,category:"T-Shirts",image:"https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=700&q=80"},
+{id:2,name:"Everyday Oversized Tee",price:12000,cost:7500,category:"Oversized",image:"https://images.unsplash.com/photo-1503341504253-dff4815485f1?auto=format&fit=crop&w=700&q=80"},
+{id:3,name:"The Classic Polo",price:14500,cost:9000,category:"Polos",image:"https://images.unsplash.com/photo-1625910513413-5fc2e7e1d0a8?auto=format&fit=crop&w=700&q=80"},
+{id:4,name:"Heavyweight Hoodie",price:28000,cost:19000,category:"Hoodies",image:"https://images.unsplash.com/photo-1556821840-3a63f95609a7?auto=format&fit=crop&w=700&q=80"}
 ];
-
 let cart=JSON.parse(localStorage.getItem("xjr_cart")||"[]");
 let orders=JSON.parse(localStorage.getItem("xjr_orders")||"[]");
-let selectedImage="";
-
-function save(){
-localStorage.setItem("xjr_products",JSON.stringify(products));
-localStorage.setItem("xjr_cart",JSON.stringify(cart));
-localStorage.setItem("xjr_orders",JSON.stringify(orders));
-}
-
-function money(n){return "₦"+Number(n).toLocaleString("en-NG")}
-
-function esc(s){
-return String(s??"").replace(/[&<>"']/g,c=>({
-"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
-}[c]));
-}
+let imgData="";
+function save(){localStorage.setItem("xjr_products",JSON.stringify(products));localStorage.setItem("xjr_cart",JSON.stringify(cart));localStorage.setItem("xjr_orders",JSON.stringify(orders))}
+function money(n){return "₦"+Number(n||0).toLocaleString("en-NG")}
+function esc(s){return String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
 
 function renderProducts(){
-let search=(document.getElementById("searchBox")?.value||"").toLowerCase();
-let filtered=products.filter(p=>{
-let categoryMatch=categoryFilter==="All"||p.category===categoryFilter;
-let searchMatch=p.name.toLowerCase().includes(search);
-let tabMatch=currentTab==="Featured"?(p.featured!==false):
-currentTab==="New Arrivals"?(p.newArrival===true):
-currentTab==="Best Sellers"?(p.bestSeller===true):(true);
-return categoryMatch&&searchMatch&&tabMatch;
-});
-
-document.getElementById("productList").innerHTML=filtered.length?
-filtered.map(p=>`
-<div class="product">
-<div class="product-image">
-${p.image?`<img src="${p.image}" alt="${esc(p.name)}">`:`<div class="placeholder">XJR.</div>`}
-${p.newArrival?`<div class="product-tag">NEW</div>`:""}
-</div>
-<div class="product-info">
-<div class="small">${esc(p.category||"XJR COLLECTION")}</div>
-<h3>${esc(p.name)}</h3>
-<div class="price">${money(p.price)}</div>
-<button onclick="addCart(${p.id})">ADD TO CART</button>
-</div>
-</div>`).join(""):`<div class="empty">No products found.</div>`;
-
-document.getElementById("cartCount").innerText=cart.reduce((a,b)=>a+b.qty,0);
+let filter=document.getElementById("shopFilter")?.value||"All";
+let search=(document.getElementById("search")?.value||"").toLowerCase();
+let list=products.filter(p=>(filter==="All"||p.category===filter)&&p.name.toLowerCase().includes(search));
+document.getElementById("productList").innerHTML=list.map(p=>`
+<div class="product">${p.image?`<img src="${p.image}">`:`<div style="height:260px;background:#eee;display:grid;place-items:center;font-size:30px">XJR</div>`}
+<h3>${esc(p.name)}</h3><p>${money(p.price)}</p><button onclick="addCart(${p.id})">ADD TO CART</button></div>`).join("")||"No products found.";
+document.getElementById("cartCount").innerText=cart.reduce((a,c)=>a+c.qty,0);
 }
-
-function setCategory(cat,btn){
-categoryFilter=cat;
-if(btn){
-document.querySelectorAll(".filter").forEach(b=>b.classList.remove("active"));
-btn.classList.add("active");
-}else{
-document.querySelectorAll(".filter").forEach(b=>{
-b.classList.toggle("active",b.textContent.trim()===cat);
-});
-}
-renderProducts();
-document.getElementById("shop").scrollIntoView({behavior:"smooth"});
-}
-
-function setTab(tab,btn){
-currentTab=tab;
-document.querySelectorAll(".tabs button").forEach(b=>b.classList.remove("active"));
-btn.classList.add("active");
-renderProducts();
-}
-
-function addCart(id){
-let p=products.find(x=>x.id===id);
-if(!p)return;
-let item=cart.find(x=>x.id===id);
-if(item)item.qty++;
-else cart.push({id,qty:1});
-save();renderProducts();
-alert("Added to cart");
-}
-
-function openCart(){
-renderCart();
-document.getElementById("cartModal").style.display="block";
-}
-
+function filterCategory(c){document.getElementById("shopFilter").value=c;renderProducts();document.getElementById("shop").scrollIntoView({behavior:"smooth"})}
+function addCart(id){let c=cart.find(x=>x.id===id);if(c)c.qty++;else cart.push({id,qty:1});save();renderProducts();alert("Added to cart")}
+function openCart(){renderCart();document.getElementById("cartModal").style.display="block"}
 function renderCart(){
-document.getElementById("cartItems").innerHTML=cart.map(c=>{
-let p=products.find(x=>x.id===c.id);
-if(!p)return "";
-return `<div style="padding:12px;border-bottom:1px solid #ddd">
-${esc(p.name)} × ${c.qty} — ${money(p.price*c.qty)}
-<button onclick="removeCart(${c.id})">REMOVE</button>
-</div>`;
-}).join("");
-document.getElementById("cartTotal").innerText=
-"TOTAL: "+money(cart.reduce((a,c)=>a+(products.find(p=>p.id===c.id)?.price||0)*c.qty,0));
+document.getElementById("cartItems").innerHTML=cart.map(c=>{let p=products.find(x=>x.id===c.id);return p?`<div class="orderitem">${esc(p.name)} × ${c.qty} — ${money(p.price*c.qty)} <button onclick="removeCart(${p.id})">REMOVE</button></div>`:""}).join("");
+document.getElementById("cartTotal").innerText="TOTAL: "+money(cart.reduce((a,c)=>a+(products.find(p=>p.id===c.id)?.price||0)*c.qty,0));
 }
-
-function removeCart(id){
-cart=cart.filter(c=>c.id!==id);
-save();renderCart();renderProducts();
-}
-
+function removeCart(id){cart=cart.filter(x=>x.id!==id);save();renderCart();renderProducts()}
 function checkout(){
-if(!cart.length)return alert("Your cart is empty");
-let name=document.getElementById("customerName").value.trim();
-let phone=document.getElementById("customerPhone").value.trim();
-let address=document.getElementById("customerAddress").value.trim();
-let note=document.getElementById("customerNote").value.trim();
-if(!name||!phone||!address)return alert("Please enter your name, phone and delivery address");
-
-let total=cart.reduce((a,c)=>a+(products.find(p=>p.id===c.id)?.price||0)*c.qty,0);
+if(!cart.length)return alert("Cart empty");
+let name=document.getElementById("custName").value.trim(),phone=document.getElementById("custPhone").value.trim(),address=document.getElementById("custAddress").value.trim(),note=document.getElementById("custNote").value.trim();
+if(!name||!phone||!address)return alert("Enter your name, phone and address");
 let id="XJR"+Date.now().toString().slice(-7);
-
-let order={
-id,name,phone,address,note,total,
-items:cart.map(c=>({name:products.find(p=>p.id===c.id)?.name,qty:c.qty})),
-status:"Order received",date:new Date().toLocaleString()
-};
-orders.push(order);save();
-
-let msg=`XJR PRINTING ORDER
-Order ID: ${id}
-Name: ${name}
-Phone: ${phone}
-Address: ${address}
-Items:
-${cart.map(c=>`${products.find(p=>p.id===c.id)?.name} x${c.qty}`).join("\n")}
-Total: ${money(total)}
-Note: ${note}`;
-
+let items=cart.map(c=>{let p=products.find(x=>x.id===c.id);return {id:c.id,name:p.name,qty:c.qty,priceSnapshot:p.price,costSnapshot:Number(p.cost||0)}});
+let total=items.reduce((a,i)=>a+i.priceSnapshot*i.qty,0);
+let cost=items.reduce((a,i)=>a+i.costSnapshot*i.qty,0);
+let o={id,name,phone,address,note,total,cost,profitSnapshot:total-cost,items,status:"Pending",date:new Date().toLocaleString(),profitCounted:false};
+orders.push(o);save();
+let msg=`XJR PRINTING ORDER\nOrder ID: ${id}\nCustomer: ${name}\nPhone: ${phone}\nAddress: ${address}\nItems:\n${items.map(i=>i.name+" ×"+i.qty+" — "+money(i.priceSnapshot*i.qty)).join("\n")}\nTotal: ${money(total)}\nNote: ${note}`;
 window.open("https://wa.me/"+WA+"?text="+encodeURIComponent(msg),"_blank");
-cart=[];save();renderProducts();closeModal("cartModal");
-alert("Order saved on this device. Send the WhatsApp message to confirm.");
+cart=[];save();renderProducts();closeModal("cartModal");alert("Order created. Send the WhatsApp message to confirm.");
 }
-
 function trackOrder(){
-let id=document.getElementById("trackInput").value.trim().toUpperCase();
-let o=orders.find(x=>x.id.toUpperCase()===id);
-document.getElementById("trackResult").innerHTML=o?
-`<div class="order-item"><b>${esc(o.id)}</b><p>Status: ${esc(o.status)}</p><p>${esc(o.date)}</p></div>`:
-"Order not found on this device.";
+let id=document.getElementById("trackInput").value.trim().toUpperCase(),o=orders.find(x=>x.id.toUpperCase()===id);
+document.getElementById("trackResult").innerHTML=o?`<div class="orderitem">Order ${esc(o.id)}<br>Status: ${esc(o.status)}</div>`:"Order not found on this browser.";
 }
-
 function closeModal(id){document.getElementById(id).style.display="none"}
-function jumpAdmin(id){document.getElementById(id).scrollIntoView({behavior:"smooth"})}
-
-function adminLogin(){
-let pw=prompt("Enter admin password");
-if(pw==="XJR2026"){
+let clicks=0,timer;
+document.getElementById("secretLogo").onclick=()=>{
+clicks++;clearTimeout(timer);timer=setTimeout(()=>clicks=0,2000);
+if(clicks>=5){clicks=0;adminLogin()}
+};
+function adminLogin(){let pw=prompt("Admin password");if(pw==="XJR2026"){openAdmin()}else if(pw!==null)alert("Wrong password")}
+function openAdmin(){renderAdmin();document.getElementById("adminModal").style.display="block";showAdmin("dash")}
+function showAdmin(id){
+document.querySelectorAll(".adminsection").forEach(x=>x.classList.add("hidden"));
+document.getElementById(id).classList.remove("hidden");
+document.querySelectorAll(".sideitem").forEach(x=>x.classList.remove("active"));
+let btn=[...document.querySelectorAll(".sideitem")].find(x=>x.getAttribute("onclick")?.includes("'"+id+"'"));
+if(btn)btn.classList.add("active");
+let titles={dash:"Dashboard",orders:"Orders",productsAdmin:"Products",analytics:"Analytics",customers:"Customers",reports:"Reports"};
+document.getElementById("adminTitle").innerText=titles[id]||"Dashboard";
 renderAdmin();
-document.getElementById("adminModal").style.display="block";
-}else if(pw!==null)alert("Incorrect password");
 }
-
-let logoClicks=0,logoTimer;
-document.getElementById("secretLogo").addEventListener("click",()=>{
-logoClicks++;
-clearTimeout(logoTimer);
-logoTimer=setTimeout(()=>logoClicks=0,2000);
-if(logoClicks>=5){logoClicks=0;adminLogin();}
-});
-
-document.getElementById("newImageFile").addEventListener("change",async function(){
-const file=this.files[0];
-if(!file)return;
-try{
-selectedImage=await compressImage(file);
-document.getElementById("imagePreview").innerHTML=
-`<img src="${selectedImage}" style="width:100%;max-height:250px;object-fit:contain">`;
-}catch(e){alert("Image could not be loaded");}
-});
-
-function compressImage(file){
-return new Promise((resolve,reject)=>{
-const reader=new FileReader();
-reader.onerror=reject;
-reader.onload=()=>{
-const img=new Image();
-img.onerror=reject;
-img.onload=()=>{
-let w=img.width,h=img.height,max=1000;
-if(w>max||h>max){
-let r=Math.min(max/w,max/h);
-w=Math.round(w*r);h=Math.round(h*r);
-}
-const canvas=document.createElement("canvas");
-canvas.width=w;canvas.height=h;
-canvas.getContext("2d").drawImage(img,0,0,w,h);
-resolve(canvas.toDataURL("image/jpeg",0.72));
-};
-img.src=reader.result;
-};
-reader.readAsDataURL(file);
-});
-}
+function jumpTo(id){document.getElementById(id)?.scrollIntoView({behavior:"smooth"})}
 
 function addProduct(){
-let name=document.getElementById("newName").value.trim();
-let price=Number(document.getElementById("newPrice").value);
-let category=document.getElementById("newCategory").value;
-let description=document.getElementById("newDescription").value.trim();
-if(!name||price<=0)return alert("Enter product name and price");
-
-products.push({
-id:Date.now(),name,price,category,description,image:selectedImage,
-featured:true,newArrival:true
+let name=document.getElementById("newName").value.trim(),price=Number(document.getElementById("newPrice").value),cost=Number(document.getElementById("newCost").value),category=document.getElementById("newCategory").value,desc=document.getElementById("newDesc").value.trim();
+if(!name||price<=0)return alert("Enter name and selling price");
+products.push({id:Date.now(),name,price,cost,category,desc,image:imgData});
+save();imgData="";document.getElementById("imagePreview").innerHTML="";
+["newName","newPrice","newCost","newDesc","newFile"].forEach(id=>document.getElementById(id).value="");
+renderProducts();renderAdmin();alert("Product added");
+}
+document.getElementById("newFile").addEventListener("change",async e=>{
+let f=e.target.files[0];if(!f)return;
+try{imgData=await compress(f);document.getElementById("imagePreview").innerHTML=`<img class="preview" src="${imgData}">`}catch{alert("Image error")}
 });
-selectedImage="";
-document.getElementById("imagePreview").innerHTML="";
-document.getElementById("newImageFile").value="";
-document.getElementById("newName").value="";
-document.getElementById("newPrice").value="";
-document.getElementById("newDescription").value="";
-
-try{save();renderProducts();renderAdmin();alert("Product saved");}
-catch(e){alert("Storage full. Try a smaller image.");}
-}
-
-function renderAdmin(){
-document.getElementById("adminProducts").innerHTML=products.map(p=>`
-<div style="border-bottom:1px solid #ddd;padding:15px">
-${p.image?`<img src="${p.image}" style="width:100px;height:120px;object-fit:cover">`:""}
-<br><b>${esc(p.name)}</b> — ${money(p.price)}
-<p>${esc(p.category||"")}</p>
-<button onclick="editProduct(${p.id})">EDIT</button>
-<button onclick="changeProductImage(${p.id})">CHANGE IMAGE</button>
-<button onclick="deleteProduct(${p.id})">DELETE</button>
-<button onclick="toggleFeatured(${p.id})">${p.featured===false?"FEATURE":"UNFEATURE"}</button>
-</div>`).join("");
-
-document.getElementById("adminOrders").innerHTML=orders.slice().reverse().map(o=>`
-<div class="order-item">
-<b>${esc(o.id)}</b> | ${esc(o.name)} | ${money(o.total)}
-<p>${esc(o.phone)} — ${esc(o.address)}</p>
-<p>Status: ${esc(o.status)}</p>
-<p>${o.items.map(i=>esc(i.name)+" ×"+i.qty).join(", ")}</p>
-<button onclick="updateOrder('${o.id}')">UPDATE STATUS</button>
-<button onclick="deleteOrder('${o.id}')">DELETE</button>
-</div>`).join("")||"No orders yet.";
-}
-
+function compress(file){return new Promise((resolve,reject)=>{let r=new FileReader();r.onerror=reject;r.onload=()=>{let i=new Image();i.onerror=reject;i.onload=()=>{let w=i.width,h=i.height,m=1000;if(w>m||h>m){let z=Math.min(m/w,m/h);w*=z;h*=z}let c=document.createElement("canvas");c.width=w;c.height=h;c.getContext("2d").drawImage(i,0,0,w,h);resolve(c.toDataURL("image/jpeg",.72))};i.src=r.result};r.readAsDataURL(file)})}
 function editProduct(id){
-let p=products.find(x=>x.id===id);
-if(!p)return;
-let name=prompt("Product name",p.name);
-if(name===null)return;
-let price=prompt("Price",p.price);
-if(price===null)return;
-let category=prompt("Category (T-Shirts, Oversized, Polos, Hoodies, Custom, Other)",p.category||"Other");
-if(category===null)return;
-let description=prompt("Description",p.description||"");
-if(description===null)return;
-p.name=name;p.price=Number(price)||p.price;p.category=category;p.description=description;
-save();renderProducts();renderAdmin();
+let p=products.find(x=>x.id===id);if(!p)return;
+let n=prompt("Product name",p.name);if(n===null)return;
+let price=prompt("Selling price",p.price);if(price===null)return;
+let cost=prompt("Cost price",p.cost||0);if(cost===null)return;
+let cat=prompt("Category",p.category);if(cat===null)return;
+p.name=n;p.price=Number(price)||p.price;p.cost=Number(cost)||0;p.category=cat;save();renderAdmin();renderProducts();
 }
-
-function changeProductImage(id){
-document.getElementById("editImageFile").click();
-window.currentEditImage=id;
-}
-
-function toggleFeatured(id){
-let p=products.find(x=>x.id===id);
-if(!p)return;
-p.featured=p.featured===false?true:false;
-save();renderAdmin();renderProducts();
-}
-
-function deleteProduct(id){
-if(confirm("Delete this product?")){
-products=products.filter(p=>p.id!==id);
-save();renderProducts();renderAdmin();
-}
-}
-
-function updateOrder(id){
-let o=orders.find(x=>x.id===id);
-if(!o)return;
-let s=prompt("New order status",o.status);
-if(s!==null){o.status=s;save();renderAdmin();}
-}
-
-function deleteOrder(id){
-if(confirm("Delete order?")){
-orders=orders.filter(o=>o.id!==id);
+function deleteProduct(id){if(confirm("Delete product?")){products=products.filter(p=>p.id!==id);save();renderAdmin();renderProducts()}}
+function changeImage(id){let input=document.createElement("input");input.type="file";input.accept="image/*";input.onchange=async()=>{if(input.files[0]){let p=products.find(x=>x.id===id);p.image=await compress(input.files[0]);save();renderAdmin();renderProducts()}};input.click()}
+function setStatus(id,status){
+let o=orders.find(x=>x.id===id);if(!o)return;
+if(status==="Delivered"&&o.status!=="Delivered"){o.profitCounted=true}
+if(o.status==="Delivered"&&status!=="Delivered"){o.profitCounted=false}
+o.status=status;
 save();renderAdmin();
 }
+function orderAction(id){let o=orders.find(x=>x.id===id);if(!o)return;let s=prompt("Set order status: Pending, Processing, In Transit, Delivered, Cancelled",o.status);if(!s)return;let allowed=["Pending","Processing","In Transit","Delivered","Cancelled"];if(!allowed.includes(s))return alert("Use one of the listed statuses");setStatus(id,s)}
+function deleteOrder(id){if(confirm("Delete this order?")){orders=orders.filter(x=>x.id!==id);save();renderAdmin()}}
+function renderOrders(){
+let search=((document.getElementById("dashSearch")?.value||"")+(document.getElementById("orderSearch")?.value||"")).toLowerCase();
+let filt=document.getElementById("orderFilter")?.value||"All";
+let list=orders.slice().reverse().filter(o=>(filt==="All"||o.status===filt)&&(`${o.id} ${o.name} ${o.phone}`.toLowerCase().includes(search)));
+let html=list.map(o=>`<tr><td>${esc(o.id)}</td><td>${esc(o.name)}<br>${esc(o.phone)}</td><td>${o.items.map(i=>esc(i.name)+" ×"+i.qty).join("<br>")}</td><td>${money(o.total)}</td><td>${money(o.profitSnapshot||0)}</td><td><span class="status ${o.status.toLowerCase().replace(" ","")}">${esc(o.status)}</span></td><td>${esc(o.date)}</td><td><button onclick="orderAction('${o.id}')">UPDATE</button></td></tr>`).join("");
+document.getElementById("ordersBody").innerHTML=html;
+document.getElementById("ordersBody2").innerHTML=html;
 }
-
-const editImageInput=document.createElement("input");
-editImageInput.type="file";
-editImageInput.accept="image/*";
-editImageInput.id="editImageFile";
-editImageInput.style.display="none";
-document.body.appendChild(editImageInput);
-
-editImageInput.addEventListener("change",async()=>{
-const file=editImageInput.files[0];
-if(!file)return;
-let id=window.currentEditImage;
-let p=products.find(x=>x.id===id);
-if(!p)return;
-try{
-p.image=await compressImage(file);
-save();renderProducts();renderAdmin();
-alert("Product image updated");
-}catch(e){alert("Could not update image");}
-editImageInput.value="";
-});
-
+function renderAdmin(){
+let delivered=orders.filter(o=>o.status==="Delivered"&&o.profitCounted!==false);
+let sales=delivered.reduce((a,o)=>a+o.total,0);
+let profit=delivered.reduce((a,o)=>a+(o.profitSnapshot||0),0);
+let customers=new Map();orders.forEach(o=>{let key=o.phone||o.name;if(!customers.has(key))customers.set(key,{name:o.name,phone:o.phone,orders:0,delivered:0,total:0});let c=customers.get(key);c.orders++;if(o.status==="Delivered")c.delivered++;c.total+=o.total});
+let pending=orders.filter(o=>["Pending","Processing","In Transit"].includes(o.status)).length;
+document.getElementById("totalOrders").innerText=orders.length;
+document.getElementById("pendingOrders").innerText=pending;
+document.getElementById("deliveredOrders").innerText=delivered.length;
+document.getElementById("cancelledOrders").innerText=orders.filter(o=>o.status==="Cancelled").length;
+document.getElementById("profitMade").innerText=money(profit);
+document.getElementById("deliveredSales").innerText=money(sales);
+document.getElementById("totalProducts").innerText=products.length;
+document.getElementById("totalCustomers").innerText=customers.size;
+document.getElementById("analyticProfit").innerText=money(profit);
+document.getElementById("analyticSales").innerText=money(sales);
+document.getElementById("analyticDelivered").innerText=delivered.length;
+document.getElementById("analyticAverage").innerText=money(delivered.length?sales/delivered.length:0);
+document.getElementById("adminProducts").innerHTML=products.map(p=>`<div class="orderitem">${p.image?`<img src="${p.image}" style="width:100px;height:120px;object-fit:cover">`:""}<p><b>${esc(p.name)}</b></p><p>Selling: ${money(p.price)} | Cost: ${money(p.cost)}</p><p>${esc(p.category)}</p><button onclick="editProduct(${p.id})">EDIT</button><button onclick="changeImage(${p.id})">CHANGE IMAGE</button><button onclick="deleteProduct(${p.id})">DELETE</button></div>`).join("");
+document.getElementById("customersBody").innerHTML=[...customers.values()].map(c=>`<tr><td>${esc(c.name)}</td><td>${esc(c.phone)}</td><td>${c.orders}</td><td>${c.delivered}</td><td>${money(c.total)}</td></tr>`).join("");
+let statuses=["Pending","Processing","In Transit","Delivered","Cancelled"];
+let max=Math.max(1,...statuses.map(s=>orders.filter(o=>o.status===s).length));
+document.getElementById("statusChart").innerHTML=statuses.map(s=>{let n=orders.filter(o=>o.status===s).length;return `<div class="barrow"><div class="barlabel"><span>${s}</span><span>${n}</span></div><div class="bar"><span style="width:${n/max*100}%"></span></div></div>`}).join("");
+document.getElementById("profitBreakdown").innerText="Delivered sales: "+money(sales)+" | Realized profit: "+money(profit)+" | Delivered orders: "+delivered.length;
+document.getElementById("reportContent").innerHTML=`<p>Total orders: ${orders.length}</p><p>Delivered orders: ${delivered.length}</p><p>Delivered sales: ${money(sales)}</p><p>Realized profit: ${money(profit)}</p><p>Products listed: ${products.length}</p><p>Customers: ${customers.size}</p>`;
+renderOrders();
+}
+function downloadReport(){
+let rows=["Order ID,Customer,Phone,Status,Total,Profit,Date"];
+orders.forEach(o=>rows.push([o.id,o.name,o.phone,o.status,o.total,o.status==="Delivered"?(o.profitSnapshot||0):0,o.date].map(x=>'"'+String(x).replace(/"/g,'""')+'"').join(",")));
+let blob=new Blob([rows.join("\n")],{type:"text/csv"}),url=URL.createObjectURL(blob),a=document.createElement("a");a.href=url;a.download="XJR-orders-report.csv";a.click();URL.revokeObjectURL(url);
+}
 renderProducts();
 </script>
 </body>
