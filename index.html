@@ -3,125 +3,367 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>XJR PRINTING | Wear Your Identity</title>
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>XJR PRINTING | Wear Your Brand</title>
 <style>
+:root{
+--orange:#ff7800;
+--black:#111;
+--white:#fff;
+--gray:#f5f5f5;
+--muted:#777;
+}
 *{box-sizing:border-box;margin:0;padding:0}
-body{font-family:Arial,sans-serif;background:white;color:#111}
-button,input,textarea{font:inherit}
+html{scroll-behavior:smooth}
+body{font-family:Arial,Helvetica,sans-serif;color:var(--black);background:white}
+button,input,textarea,select{font:inherit}
 button{cursor:pointer}
+a{text-decoration:none;color:inherit}
+img{max-width:100%}
+
+.announcement{
+background:#111;color:#fff;text-align:center;padding:9px;
+font-size:10px;letter-spacing:1.8px;text-transform:uppercase
+}
 header{
-background:#111;color:white;padding:18px 5%;
-display:flex;justify-content:space-between;align-items:center;
-position:sticky;top:0;z-index:10
+display:flex;align-items:center;justify-content:space-between;
+padding:18px 5%;background:white;position:sticky;top:0;
+z-index:20;border-bottom:1px solid #eee
 }
-.logo{font-size:22px;font-weight:900;letter-spacing:2px;cursor:pointer}
-.logo span{color:#aaa}
-nav{display:flex;gap:12px;align-items:center}
-nav a{color:white;text-decoration:none;font-size:12px}
-nav button{background:white;color:black;border:0;padding:10px;font-weight:bold}
+.logo{font-size:25px;font-weight:900;letter-spacing:-1px;cursor:pointer}
+.logo small{display:block;font-size:8px;letter-spacing:4px;text-align:center}
+nav{display:flex;gap:18px;align-items:center}
+nav a{font-size:11px;font-weight:bold;text-transform:uppercase}
+.nav-buttons{display:flex;gap:10px;align-items:center}
+.nav-buttons button{border:0;background:none;font-size:16px;padding:5px}
+.mobile-menu{display:none}
+
 .hero{
-min-height:450px;background:#111;color:white;padding:65px 7%;
-display:flex;flex-direction:column;justify-content:center
+position:relative;min-height:520px;background:#171717;color:white;
+overflow:hidden;display:flex;align-items:center;padding:50px 7%
 }
-.hero small{letter-spacing:4px;color:#aaa}
-.hero h1{font-size:clamp(42px,9vw,90px);line-height:.95;margin:22px 0;font-weight:900}
-.hero p{max-width:450px;color:#ccc;line-height:1.7}
-.btn{background:#111;color:white;border:1px solid #111;padding:13px 20px;display:inline-block;text-decoration:none;font-weight:bold}
-.btn.white{background:white;color:black;border-color:white}
-.hero .btn{margin-top:25px;width:max-content}
-.section{padding:55px 5%}
-.section-title{display:flex;justify-content:space-between;align-items:center;margin-bottom:30px}
-.section-title h2{font-size:28px}
-.products{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
-.product{border:1px solid #eee}
-.product-img{height:230px;background:#f3f3f3;display:flex;align-items:center;justify-content:center;overflow:hidden}
-.product-img img{width:100%;height:100%;object-fit:cover}
-.product-info{padding:15px}
-.product-info h3{font-size:15px;margin:8px 0}
-.product-info p{font-weight:bold;margin-bottom:12px}
-.product-info button{width:100%;padding:12px;background:#111;color:white;border:0}
-.tag{font-size:11px;color:#777;letter-spacing:1px}
-.banner{background:#eee;padding:45px 5%;text-align:center}
-.banner h2{font-size:30px;margin-bottom:10px}
-footer{background:#111;color:white;padding:40px 5%;line-height:2}
-footer a{color:white}
-.modal{position:fixed;inset:0;background:#0009;z-index:50;display:none;overflow:auto;padding:15px}
-.modal-inner{background:white;max-width:700px;margin:25px auto;padding:22px}
-.modal-inner h2{margin-bottom:20px}
-.close{float:right;font-size:25px;border:0;background:white}
-.admin-shortcuts{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:20px 0}
-.admin-shortcuts button{padding:13px 5px;background:#111;color:white;border:0;font-size:11px;font-weight:bold}
-.admin-box{background:white;padding:20px;margin:20px 0;border:1px solid #eee}
-.admin-box button{padding:10px;margin:5px;border:0;background:#111;color:white}
-.admin-box input,.admin-box textarea{padding:12px;width:100%;margin:7px 0;border:1px solid #ddd}
-.order-item{border:1px solid #ddd;padding:15px;margin:10px 0;background:white;overflow-wrap:anywhere}
-.hidden{display:none!important}
+.hero-bg{
+position:absolute;inset:0;background-size:cover;background-position:center;
+background-image:linear-gradient(90deg,#111 0%,#111e 48%,#1113 100%),
+url('https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=1600&q=85');
+}
+.hero-content{position:relative;z-index:2;max-width:650px}
+.hero-label{font-size:11px;letter-spacing:3px;color:#ff9b46;margin-bottom:22px}
+.hero h1{font-size:clamp(43px,8vw,86px);font-weight:900;line-height:.98;letter-spacing:-3px}
+.hero h1 span{color:var(--orange)}
+.hero p{max-width:440px;font-size:14px;line-height:1.7;color:#ddd;margin-top:20px}
+.hero-buttons{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px}
+.button{
+display:inline-flex;align-items:center;justify-content:center;
+padding:15px 22px;background:var(--orange);color:#111;
+border:1px solid var(--orange);font-size:11px;font-weight:bold;
+text-transform:uppercase;letter-spacing:1px
+}
+.button.secondary{background:transparent;color:white;border-color:white}
+.button.black{background:#111;color:white;border-color:#111}
+.button.white{background:white;color:black;border-color:white}
+
+.benefits{
+display:grid;grid-template-columns:repeat(4,1fr);
+border-bottom:1px solid #eee;padding:26px 5%
+}
+.benefit{text-align:center;padding:8px 12px;border-right:1px solid #eee}
+.benefit:last-child{border:0}
+.benefit strong{display:block;font-size:10px;letter-spacing:1px;text-transform:uppercase}
+.benefit p{font-size:10px;color:#777;margin-top:6px;line-height:1.5}
+
+.section{padding:65px 5%}
+.section-head{display:flex;justify-content:space-between;align-items:end;margin-bottom:28px;gap:20px}
+.eyebrow{font-size:10px;letter-spacing:3px;color:#777;margin-bottom:10px}
+.section-head h2{font-size:clamp(25px,4vw,40px);font-weight:900;letter-spacing:-1px}
+.section-head a{font-size:11px;text-transform:uppercase;border-bottom:1px solid #111;padding-bottom:5px}
+
+.categories{
+display:grid;grid-template-columns:repeat(4,1fr);gap:15px
+}
+.category-card{position:relative;background:#eee;overflow:hidden;cursor:pointer}
+.category-card img{width:100%;height:270px;object-fit:cover;display:block;transition:transform .5s}
+.category-card:hover img{transform:scale(1.05)}
+.category-card .cat-name{
+position:absolute;bottom:0;left:0;right:0;background:white;
+padding:14px;font-size:12px;font-weight:bold;text-transform:uppercase;
+display:flex;justify-content:space-between;align-items:center
+}
+.category-card .cat-name span{font-size:18px}
+
+.shop-tools{
+display:flex;flex-wrap:wrap;gap:10px;justify-content:space-between;
+align-items:center;margin-bottom:25px
+}
+.filters{display:flex;gap:8px;flex-wrap:wrap}
+.filter{
+background:white;border:1px solid #ddd;padding:10px 14px;
+font-size:10px;text-transform:uppercase
+}
+.filter.active{background:#111;color:white;border-color:#111}
+.search-box{border:1px solid #ddd;padding:10px 12px;min-width:160px}
+.products{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.product{min-width:0}
+.product-image{
+position:relative;background:#f3f3f3;aspect-ratio:3/4;
+overflow:hidden
+}
+.product-image img{width:100%;height:100%;object-fit:cover;display:block}
+.product-image .placeholder{
+height:100%;display:flex;align-items:center;justify-content:center;
+font-size:35px;font-weight:900;color:#222
+}
+.product-tag{
+position:absolute;top:10px;left:10px;background:white;
+padding:7px;font-size:9px;letter-spacing:1px
+}
+.product-info{padding:12px 2px}
+.product-info .small{font-size:9px;color:#777;text-transform:uppercase;letter-spacing:1px}
+.product-info h3{font-size:13px;margin:6px 0}
+.price{font-size:13px;font-weight:bold}
+.product-info button{
+width:100%;margin-top:12px;background:#111;color:white;
+border:0;padding:12px;font-size:10px;font-weight:bold;text-transform:uppercase
+}
+.product-info button:hover{background:var(--orange);color:black}
+
+.custom-banner{
+background:#111;color:white;display:grid;grid-template-columns:1fr 1fr;
+min-height:360px
+}
+.custom-banner .custom-text{padding:55px 8%;display:flex;flex-direction:column;justify-content:center}
+.custom-banner h2{font-size:clamp(30px,5vw,55px);line-height:1.05;margin:15px 0}
+.custom-banner p{font-size:13px;line-height:1.7;color:#ccc;max-width:400px}
+.custom-banner img{width:100%;height:100%;min-height:360px;object-fit:cover}
+.orange{color:var(--orange)}
+
+.tabs{display:flex;gap:20px;margin-bottom:25px}
+.tabs button{border:0;background:white;color:#777;font-size:11px}
+.tabs button.active{color:#111;border-bottom:1px solid;padding-bottom:8px}
+
+.contact-section{background:#f5f5f5;text-align:center;padding:60px 5%}
+.contact-section h2{font-size:35px;margin:15px 0}
+.contact-section p{font-size:13px;color:#666;line-height:1.7;margin-bottom:25px}
+
+footer{background:#111;color:white;padding:50px 5%}
+.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr;gap:30px}
+footer h3{font-size:20px;margin-bottom:15px}
+footer h4{font-size:11px;letter-spacing:1px;margin-bottom:15px}
+footer p,footer a{font-size:12px;color:#bbb;line-height:2}
+footer a{display:block}
+.copyright{border-top:1px solid #333;margin-top:30px;padding-top:20px;font-size:10px;color:#888}
+
 .whatsapp-float{
-position:fixed;right:18px;bottom:24px;width:58px;height:58px;
-border-radius:50%;background:#25D366;display:flex;
-align-items:center;justify-content:center;
-box-shadow:0 4px 15px #0004;z-index:999;text-decoration:none
+position:fixed;right:20px;bottom:24px;width:60px;height:60px;
+border-radius:50%;background:#25D366;display:flex;align-items:center;
+justify-content:center;box-shadow:0 4px 18px #0004;z-index:1000
 }
 .whatsapp-float img{width:35px;height:35px}
-.upload-label{display:block;background:#eee;padding:15px;text-align:center;margin:10px 0}
-@media(min-width:700px){
-.products{grid-template-columns:repeat(4,1fr);gap:20px}
-.product-img{height:320px}
-.hero{min-height:550px}
+
+.modal{position:fixed;inset:0;background:#0009;z-index:100;display:none;overflow:auto;padding:15px}
+.modal-inner{background:white;max-width:800px;margin:25px auto;padding:25px}
+.close{float:right;border:0;background:white;font-size:27px}
+.modal-inner h2{margin-bottom:20px}
+.modal-inner input,.modal-inner textarea,.modal-inner select{
+width:100%;padding:12px;margin:7px 0;border:1px solid #ddd
+}
+.modal-inner textarea{min-height:80px}
+.admin-shortcuts{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:20px 0}
+.admin-shortcuts button{background:#111;color:white;padding:13px 5px;border:0;font-size:11px;font-weight:bold}
+.admin-box{padding:20px;border:1px solid #eee;margin:20px 0}
+.admin-box button{padding:11px;background:#111;color:white;border:0;margin:5px 2px}
+.admin-box h3{margin-bottom:15px}
+.upload-label{display:block;background:#f3f3f3;padding:15px;margin:10px 0}
+.order-item{border:1px solid #ddd;padding:15px;margin:10px 0;overflow-wrap:anywhere}
+.hidden{display:none!important}
+.empty{text-align:center;padding:40px;color:#777}
+@media(max-width:750px){
+header{padding:14px 4%}
+nav{gap:10px}
+nav a{font-size:9px}
+.logo{font-size:21px}
+.hero{min-height:460px;padding:45px 6%}
+.hero h1{letter-spacing:-2px}
+.benefits{grid-template-columns:repeat(2,1fr);gap:10px}
+.benefit:nth-child(2){border-right:0}
+.categories{grid-template-columns:repeat(2,1fr);gap:10px}
+.category-card img{height:220px}
+.products{grid-template-columns:repeat(2,1fr);gap:12px}
+.section{padding:45px 4%}
+.custom-banner{grid-template-columns:1fr}
+.custom-banner img{min-height:230px;max-height:350px}
+.footer-grid{grid-template-columns:1fr 1fr}
+.footer-grid>div:first-child{grid-column:1/-1}
+}
+@media(max-width:380px){
+nav a{display:none}
+.hero h1{font-size:43px}
+.category-card img{height:190px}
 }
 </style>
 </head>
 <body>
 
+<div class="announcement">Nationwide delivery · Custom printing · Wear your identity</div>
+
 <header>
-<div class="logo" id="secretLogo">XJR <span>PRINTING</span></div>
+<div class="logo" id="secretLogo">
+XJR.
+<small>PRINTING</small>
+</div>
+
 <nav>
-<a href="#shop">SHOP</a>
-<a href="#about">ABOUT</a>
-<button onclick="openCart()">CART (<span id="cartCount">0</span>)</button>
+<a href="#home">Home</a>
+<a href="#shop">Shop</a>
+<a href="#categories">Categories</a>
+<a href="#custom">Custom Design</a>
+<a href="#about">About</a>
 </nav>
+
+<div class="nav-buttons">
+<button onclick="openCart()">♧ <span id="cartCount">0</span></button>
+</div>
 </header>
 
-<section class="hero">
-<small>XJR PRINTING CLOTHING</small>
-<h1>WEAR YOUR<br>IDENTITY.</h1>
-<p>Style. Identity. Creativity. Discover clothing made to express who you are.</p>
-<a href="#shop" class="btn white">SHOP COLLECTION</a>
+<section class="hero" id="home">
+<div class="hero-bg"></div>
+<div class="hero-content">
+<div class="hero-label">YOUR STYLE. YOUR IDENTITY.</div>
+<h1>WEAR YOUR<br>BRAND. DEFINE<br>YOUR <span>STYLE.</span></h1>
+<p>Premium clothing. Exceptional prints. From everyday essentials to custom creations — make it yours.</p>
+<div class="hero-buttons">
+<a href="#shop" class="button">Shop the Collection ↗</a>
+<a href="#custom" class="button secondary">Design Your Own →</a>
+</div>
+</div>
+</section>
+
+<section class="benefits">
+<div class="benefit"><strong>♧ Nationwide Delivery</strong><p>From our studio to your doorstep</p></div>
+<div class="benefit"><strong>Premium Quality</strong><p>Great fabric. Better feel.</p></div>
+<div class="benefit"><strong>Make It Personal</strong><p>Your ideas, expertly printed</p></div>
+<div class="benefit"><strong>Order With Confidence</strong><p>Real people. Personal support.</p></div>
+</section>
+
+<section class="section" id="categories">
+<div class="section-head">
+<div>
+<div class="eyebrow">FIND YOUR EVERYDAY</div>
+<h2>Shop by Category</h2>
+</div>
+<a href="#shop">Explore Categories ↗</a>
+</div>
+
+<div class="categories">
+<div class="category-card" onclick="setCategory('T-Shirts')">
+<img src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=700&q=80" alt="T-shirts">
+<div class="cat-name">Round Neck T-Shirts <span>↗</span></div>
+</div>
+<div class="category-card" onclick="setCategory('Oversized')">
+<img src="https://images.unsplash.com/photo-1503341504253-dff4815485f1?auto=format&fit=crop&w=700&q=80" alt="Oversized">
+<div class="cat-name">Oversized Tees <span>↗</span></div>
+</div>
+<div class="category-card" onclick="setCategory('Polos')">
+<img src="https://images.unsplash.com/photo-1625910513413-5fc2e7e1d0a8?auto=format&fit=crop&w=700&q=80" alt="Polo shirts">
+<div class="cat-name">Polo Shirts <span>↗</span></div>
+</div>
+<div class="category-card" onclick="setCategory('Hoodies')">
+<img src="https://images.unsplash.com/photo-1556821840-3a63f95609a7?auto=format&fit=crop&w=700&q=80" alt="Hoodies">
+<div class="cat-name">Hoodies <span>↗</span></div>
+</div>
+</div>
 </section>
 
 <section class="section" id="shop">
-<div class="section-title">
-<h2>THE COLLECTION</h2>
-<span class="tag">XJR ORIGINALS</span>
+<div class="section-head">
+<div>
+<div class="eyebrow">THE PIECES YOU'LL REACH FOR</div>
+<h2>Everyday. Anything but ordinary.</h2>
 </div>
+</div>
+
+<div class="shop-tools">
+<div class="filters" id="filters">
+<button class="filter active" onclick="setCategory('All',this)">All</button>
+<button class="filter" onclick="setCategory('T-Shirts',this)">T-Shirts</button>
+<button class="filter" onclick="setCategory('Oversized',this)">Oversized</button>
+<button class="filter" onclick="setCategory('Polos',this)">Polos</button>
+<button class="filter" onclick="setCategory('Hoodies',this)">Hoodies</button>
+<button class="filter" onclick="setCategory('Custom',this)">Custom</button>
+</div>
+<input class="search-box" id="searchBox" placeholder="Search products..." oninput="renderProducts()">
+</div>
+
+<div class="tabs">
+<button class="active" onclick="setTab('Featured',this)">Featured</button>
+<button onclick="setTab('New Arrivals',this)">New Arrivals</button>
+<button onclick="setTab('Best Sellers',this)">Best Sellers</button>
+</div>
+
 <div class="products" id="productList"></div>
 </section>
 
-<section class="banner" id="about">
-<h2>MADE TO STAND OUT.</h2>
-<p>XJR PRINTING — more than prints, it's an identity.</p>
+<section class="custom-banner" id="custom">
+<div class="custom-text">
+<div class="eyebrow orange">MAKE IT PERSONAL</div>
+<h2>YOUR IDEA.<br>YOUR DESIGN.</h2>
+<p>Bring your vision to life. Personalised T-shirts, branded apparel, event clothing and custom printing made just for you.</p>
+<div style="margin-top:25px">
+<a class="button" href="https://wa.me/2347015119367?text=Hello%20XJR%20PRINTING%2C%20I%20want%20to%20make%20a%20custom%20design." target="_blank">Start Your Design →</a>
+</div>
+</div>
+<img src="https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&fit=crop&w=1200&q=85" alt="Fashion">
+</section>
+
+<section class="section" id="about">
+<div class="section-head">
+<div>
+<div class="eyebrow">THE XJR DIFFERENCE</div>
+<h2>Built for comfort.<br>Made to stand out.</h2>
+</div>
+</div>
+<p style="max-width:650px;line-height:1.8;font-size:14px;color:#666">
+XJR PRINTING brings fashion, creativity and personal expression together. From everyday clothing to custom prints and brand merchandise, we help you wear what represents you.
+</p>
 </section>
 
 <section class="section">
 <h2>TRACK YOUR ORDER</h2>
-<input id="trackInput" placeholder="Enter your order number"
-style="padding:13px;width:100%;margin:15px 0;border:1px solid #ddd">
-<button class="btn" onclick="trackOrder()">TRACK ORDER</button>
+<input id="trackInput" placeholder="Enter your order number" style="padding:13px;width:100%;margin:15px 0;border:1px solid #ddd">
+<button class="button black" onclick="trackOrder()">Track Order</button>
 <div id="trackResult" style="margin-top:15px"></div>
 </section>
 
+<section class="contact-section">
+<div class="eyebrow">WE'RE HERE FOR YOU</div>
+<h2>Let's create something.</h2>
+<p>Questions, custom orders or collaborations?<br>Talk directly with XJR PRINTING.</p>
+<a class="button" href="https://wa.me/2347015119367" target="_blank">Contact Us on WhatsApp</a>
+</section>
+
 <footer>
-<h2>XJR PRINTING</h2>
-<p>Wear Your Identity.</p>
-<p>Orders and enquiries via WhatsApp.</p>
-<a href="https://wa.me/2347015119367">CHAT WITH US</a>
-<p>© 2026 XJR PRINTING</p>
+<div class="footer-grid">
+<div>
+<h3>XJR. PRINTING</h3>
+<p>Wear your brand. Define your style.</p>
+<p>Fashion, custom apparel and printing.</p>
+</div>
+<div>
+<h4>SHOP</h4>
+<a href="#shop">All Products</a>
+<a href="#categories">Categories</a>
+<a href="#custom">Custom Design</a>
+</div>
+<div>
+<h4>CONTACT</h4>
+<a href="https://wa.me/2347015119367">WhatsApp</a>
+<p>Nigeria · Nationwide delivery</p>
+</div>
+</div>
+<div class="copyright">© 2026 XJR PRINTING. All rights reserved.</div>
 </footer>
 
-<!-- Floating WhatsApp -->
-<a class="whatsapp-float" href="https://wa.me/2347015119367"
-target="_blank" aria-label="Chat on WhatsApp">
+<a class="whatsapp-float" href="https://wa.me/2347015119367" target="_blank" aria-label="WhatsApp">
 <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp">
 </a>
 
@@ -132,11 +374,11 @@ target="_blank" aria-label="Chat on WhatsApp">
 <h2>YOUR CART</h2>
 <div id="cartItems"></div>
 <p id="cartTotal" style="margin:20px 0;font-weight:bold"></p>
-<input id="customerName" placeholder="Your full name" style="width:100%;padding:12px;margin:7px 0">
-<input id="customerPhone" placeholder="Your phone number" style="width:100%;padding:12px;margin:7px 0">
-<textarea id="customerAddress" placeholder="Delivery address / location" style="width:100%;padding:12px;margin:7px 0"></textarea>
-<textarea id="customerNote" placeholder="Order note (optional)" style="width:100%;padding:12px;margin:7px 0"></textarea>
-<button class="btn" onclick="checkout()" style="width:100%">ORDER VIA WHATSAPP</button>
+<input id="customerName" placeholder="Your full name">
+<input id="customerPhone" placeholder="Your phone number">
+<textarea id="customerAddress" placeholder="Delivery address"></textarea>
+<textarea id="customerNote" placeholder="Order note (optional)"></textarea>
+<button class="button black" onclick="checkout()" style="width:100%">ORDER VIA WHATSAPP</button>
 </div>
 </div>
 
@@ -145,7 +387,6 @@ target="_blank" aria-label="Chat on WhatsApp">
 <div class="modal-inner">
 <button class="close" onclick="closeModal('adminModal')">×</button>
 <h2>ADMIN DASHBOARD</h2>
-
 <div class="admin-shortcuts">
 <button onclick="jumpAdmin('addSection')">ADD PRODUCT</button>
 <button onclick="jumpAdmin('ordersSection')">CHECK ORDERS</button>
@@ -156,15 +397,21 @@ target="_blank" aria-label="Chat on WhatsApp">
 <h3>ADD PRODUCT</h3>
 <input id="newName" placeholder="Product name">
 <input id="newPrice" type="number" placeholder="Price in NGN">
+<select id="newCategory">
+<option value="T-Shirts">T-Shirts</option>
+<option value="Oversized">Oversized</option>
+<option value="Polos">Polos</option>
+<option value="Hoodies">Hoodies</option>
+<option value="Custom">Custom</option>
+<option value="Other">Other</option>
+</select>
 <textarea id="newDescription" placeholder="Product description"></textarea>
-
 <label class="upload-label">
-<strong>SELECT PRODUCT IMAGE FROM PHONE</strong>
+<strong>UPLOAD PRODUCT IMAGE FROM PHONE</strong>
 <input id="newImageFile" type="file" accept="image/*" style="display:block;width:100%;margin-top:15px">
 </label>
-
-<div id="imagePreview" style="margin:10px 0"></div>
-<button onclick="addProduct()">ADD PRODUCT</button>
+<div id="imagePreview"></div>
+<button onclick="addProduct()">SAVE PRODUCT</button>
 </div>
 
 <div class="admin-box" id="editSection">
@@ -181,12 +428,14 @@ target="_blank" aria-label="Chat on WhatsApp">
 
 <script>
 const WA="2347015119367";
+let categoryFilter="All";
+let currentTab="Featured";
 
 let products=JSON.parse(localStorage.getItem("xjr_products")||"null")||[
-{id:1,name:"XJR Signature Tee",price:12000,image:"",description:"Classic XJR signature shirt"},
-{id:2,name:"Streetwear Hoodie",price:25000,image:"",description:"Premium everyday hoodie"},
-{id:3,name:"Classic Polo",price:18000,image:"",description:"Clean and comfortable polo"},
-{id:4,name:"Custom Graphic Tee",price:15000,image:"",description:"Custom graphic style"}
+{id:1,name:"The Essential Tee",price:8500,category:"T-Shirts",image:"https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=700&q=80",description:"Classic everyday T-shirt",featured:true},
+{id:2,name:"Everyday Oversized Tee",price:12000,category:"Oversized",image:"https://images.unsplash.com/photo-1503341504253-dff4815485f1?auto=format&fit=crop&w=700&q=80",description:"Relaxed oversized fit",featured:true},
+{id:3,name:"The Classic Polo",price:14500,category:"Polos",image:"https://images.unsplash.com/photo-1625910513413-5fc2e7e1d0a8?auto=format&fit=crop&w=700&q=80",description:"Smart classic polo",featured:true},
+{id:4,name:"Heavyweight Hoodie",price:28000,category:"Hoodies",image:"https://images.unsplash.com/photo-1556821840-3a63f95609a7?auto=format&fit=crop&w=700&q=80",description:"Comfortable heavyweight hoodie",featured:true}
 ];
 
 let cart=JSON.parse(localStorage.getItem("xjr_cart")||"[]");
@@ -199,9 +448,7 @@ localStorage.setItem("xjr_cart",JSON.stringify(cart));
 localStorage.setItem("xjr_orders",JSON.stringify(orders));
 }
 
-function money(n){
-return "₦"+Number(n).toLocaleString("en-NG");
-}
+function money(n){return "₦"+Number(n).toLocaleString("en-NG")}
 
 function esc(s){
 return String(s??"").replace(/[&<>"']/g,c=>({
@@ -210,22 +457,53 @@ return String(s??"").replace(/[&<>"']/g,c=>({
 }
 
 function renderProducts(){
-document.getElementById("productList").innerHTML=products.map(p=>`
+let search=(document.getElementById("searchBox")?.value||"").toLowerCase();
+let filtered=products.filter(p=>{
+let categoryMatch=categoryFilter==="All"||p.category===categoryFilter;
+let searchMatch=p.name.toLowerCase().includes(search);
+let tabMatch=currentTab==="Featured"?(p.featured!==false):
+currentTab==="New Arrivals"?(p.newArrival===true):
+currentTab==="Best Sellers"?(p.bestSeller===true):(true);
+return categoryMatch&&searchMatch&&tabMatch;
+});
+
+document.getElementById("productList").innerHTML=filtered.length?
+filtered.map(p=>`
 <div class="product">
-<div class="product-img">
-${p.image?`<img src="${p.image}" alt="${esc(p.name)}">`:
-`<div style="font-size:30px;font-weight:900">XJR</div>`}
+<div class="product-image">
+${p.image?`<img src="${p.image}" alt="${esc(p.name)}">`:`<div class="placeholder">XJR.</div>`}
+${p.newArrival?`<div class="product-tag">NEW</div>`:""}
 </div>
 <div class="product-info">
-<div class="tag">XJR COLLECTION</div>
+<div class="small">${esc(p.category||"XJR COLLECTION")}</div>
 <h3>${esc(p.name)}</h3>
-<p>${money(p.price)}</p>
+<div class="price">${money(p.price)}</div>
 <button onclick="addCart(${p.id})">ADD TO CART</button>
 </div>
-</div>`).join("");
+</div>`).join(""):`<div class="empty">No products found.</div>`;
 
-document.getElementById("cartCount").innerText=
-cart.reduce((a,b)=>a+b.qty,0);
+document.getElementById("cartCount").innerText=cart.reduce((a,b)=>a+b.qty,0);
+}
+
+function setCategory(cat,btn){
+categoryFilter=cat;
+if(btn){
+document.querySelectorAll(".filter").forEach(b=>b.classList.remove("active"));
+btn.classList.add("active");
+}else{
+document.querySelectorAll(".filter").forEach(b=>{
+b.classList.toggle("active",b.textContent.trim()===cat);
+});
+}
+renderProducts();
+document.getElementById("shop").scrollIntoView({behavior:"smooth"});
+}
+
+function setTab(tab,btn){
+currentTab=tab;
+document.querySelectorAll(".tabs button").forEach(b=>b.classList.remove("active"));
+btn.classList.add("active");
+renderProducts();
 }
 
 function addCart(id){
@@ -247,15 +525,13 @@ function renderCart(){
 document.getElementById("cartItems").innerHTML=cart.map(c=>{
 let p=products.find(x=>x.id===c.id);
 if(!p)return "";
-return `<div style="padding:10px;border-bottom:1px solid #ddd">
+return `<div style="padding:12px;border-bottom:1px solid #ddd">
 ${esc(p.name)} × ${c.qty} — ${money(p.price*c.qty)}
 <button onclick="removeCart(${c.id})">REMOVE</button>
 </div>`;
 }).join("");
-
 document.getElementById("cartTotal").innerText=
-"TOTAL: "+money(cart.reduce((a,c)=>
-a+(products.find(p=>p.id===c.id)?.price||0)*c.qty,0));
+"TOTAL: "+money(cart.reduce((a,c)=>a+(products.find(p=>p.id===c.id)?.price||0)*c.qty,0));
 }
 
 function removeCart(id){
@@ -265,29 +541,20 @@ save();renderCart();renderProducts();
 
 function checkout(){
 if(!cart.length)return alert("Your cart is empty");
-
 let name=document.getElementById("customerName").value.trim();
 let phone=document.getElementById("customerPhone").value.trim();
 let address=document.getElementById("customerAddress").value.trim();
 let note=document.getElementById("customerNote").value.trim();
+if(!name||!phone||!address)return alert("Please enter your name, phone and delivery address");
 
-if(!name||!phone||!address)
-return alert("Please enter your name, phone and delivery address");
-
-let total=cart.reduce((a,c)=>
-a+(products.find(p=>p.id===c.id)?.price||0)*c.qty,0);
-
+let total=cart.reduce((a,c)=>a+(products.find(p=>p.id===c.id)?.price||0)*c.qty,0);
 let id="XJR"+Date.now().toString().slice(-7);
 
 let order={
 id,name,phone,address,note,total,
-items:cart.map(c=>({
-name:products.find(p=>p.id===c.id)?.name,qty:c.qty
-})),
-status:"Order received",
-date:new Date().toLocaleString()
+items:cart.map(c=>({name:products.find(p=>p.id===c.id)?.name,qty:c.qty})),
+status:"Order received",date:new Date().toLocaleString()
 };
-
 orders.push(order);save();
 
 let msg=`XJR PRINTING ORDER
@@ -295,15 +562,12 @@ Order ID: ${id}
 Name: ${name}
 Phone: ${phone}
 Address: ${address}
-
 Items:
 ${cart.map(c=>`${products.find(p=>p.id===c.id)?.name} x${c.qty}`).join("\n")}
-
 Total: ${money(total)}
 Note: ${note}`;
 
 window.open("https://wa.me/"+WA+"?text="+encodeURIComponent(msg),"_blank");
-
 cart=[];save();renderProducts();closeModal("cartModal");
 alert("Order saved on this device. Send the WhatsApp message to confirm.");
 }
@@ -316,48 +580,33 @@ document.getElementById("trackResult").innerHTML=o?
 "Order not found on this device.";
 }
 
-function closeModal(id){
-document.getElementById(id).style.display="none";
-}
-
-function jumpAdmin(id){
-document.getElementById(id).scrollIntoView({behavior:"smooth"});
-}
+function closeModal(id){document.getElementById(id).style.display="none"}
+function jumpAdmin(id){document.getElementById(id).scrollIntoView({behavior:"smooth"})}
 
 function adminLogin(){
 let pw=prompt("Enter admin password");
 if(pw==="XJR2026"){
 renderAdmin();
 document.getElementById("adminModal").style.display="block";
-}else if(pw!==null){
-alert("Incorrect password");
-}
+}else if(pw!==null)alert("Incorrect password");
 }
 
-let logoClicks=0;
-let logoTimer;
-
+let logoClicks=0,logoTimer;
 document.getElementById("secretLogo").addEventListener("click",()=>{
 logoClicks++;
 clearTimeout(logoTimer);
 logoTimer=setTimeout(()=>logoClicks=0,2000);
-if(logoClicks>=5){
-logoClicks=0;
-adminLogin();
-}
+if(logoClicks>=5){logoClicks=0;adminLogin();}
 });
 
 document.getElementById("newImageFile").addEventListener("change",async function(){
 const file=this.files[0];
 if(!file)return;
-
 try{
 selectedImage=await compressImage(file);
 document.getElementById("imagePreview").innerHTML=
 `<img src="${selectedImage}" style="width:100%;max-height:250px;object-fit:contain">`;
-}catch(e){
-alert("Image could not be loaded. Please select another image.");
-}
+}catch(e){alert("Image could not be loaded");}
 });
 
 function compressImage(file){
@@ -368,16 +617,15 @@ reader.onload=()=>{
 const img=new Image();
 img.onerror=reject;
 img.onload=()=>{
-const max=900;
-let w=img.width,h=img.height;
+let w=img.width,h=img.height,max=1000;
 if(w>max||h>max){
-const ratio=Math.min(max/w,max/h);
-w=Math.round(w*ratio);h=Math.round(h*ratio);
+let r=Math.min(max/w,max/h);
+w=Math.round(w*r);h=Math.round(h*r);
 }
 const canvas=document.createElement("canvas");
 canvas.width=w;canvas.height=h;
 canvas.getContext("2d").drawImage(img,0,0,w,h);
-resolve(canvas.toDataURL("image/jpeg",0.75));
+resolve(canvas.toDataURL("image/jpeg",0.72));
 };
 img.src=reader.result;
 };
@@ -388,15 +636,14 @@ reader.readAsDataURL(file);
 function addProduct(){
 let name=document.getElementById("newName").value.trim();
 let price=Number(document.getElementById("newPrice").value);
+let category=document.getElementById("newCategory").value;
 let description=document.getElementById("newDescription").value.trim();
-
-if(!name||price<=0)
-return alert("Enter product name and price");
+if(!name||price<=0)return alert("Enter product name and price");
 
 products.push({
-id:Date.now(),name,price,image:selectedImage,description
+id:Date.now(),name,price,category,description,image:selectedImage,
+featured:true,newArrival:true
 });
-
 selectedImage="";
 document.getElementById("imagePreview").innerHTML="";
 document.getElementById("newImageFile").value="";
@@ -404,25 +651,23 @@ document.getElementById("newName").value="";
 document.getElementById("newPrice").value="";
 document.getElementById("newDescription").value="";
 
-try{
-save();renderProducts();renderAdmin();
-alert("Product added successfully");
-}catch(e){
-alert("Storage is full. Try using a smaller product image.");
-}
+try{save();renderProducts();renderAdmin();alert("Product saved");}
+catch(e){alert("Storage full. Try a smaller image.");}
 }
 
 function renderAdmin(){
 document.getElementById("adminProducts").innerHTML=products.map(p=>`
 <div style="border-bottom:1px solid #ddd;padding:15px">
-${p.image?`<img src="${p.image}" style="width:100px;height:100px;object-fit:cover">`:""}
-<br><strong>${esc(p.name)}</strong> — ${money(p.price)}
-<br><button onclick="editProduct(${p.id})">EDIT</button>
+${p.image?`<img src="${p.image}" style="width:100px;height:120px;object-fit:cover">`:""}
+<br><b>${esc(p.name)}</b> — ${money(p.price)}
+<p>${esc(p.category||"")}</p>
+<button onclick="editProduct(${p.id})">EDIT</button>
+<button onclick="changeProductImage(${p.id})">CHANGE IMAGE</button>
 <button onclick="deleteProduct(${p.id})">DELETE</button>
+<button onclick="toggleFeatured(${p.id})">${p.featured===false?"FEATURE":"UNFEATURE"}</button>
 </div>`).join("");
 
-document.getElementById("adminOrders").innerHTML=
-orders.slice().reverse().map(o=>`
+document.getElementById("adminOrders").innerHTML=orders.slice().reverse().map(o=>`
 <div class="order-item">
 <b>${esc(o.id)}</b> | ${esc(o.name)} | ${money(o.total)}
 <p>${esc(o.phone)} — ${esc(o.address)}</p>
@@ -440,14 +685,24 @@ let name=prompt("Product name",p.name);
 if(name===null)return;
 let price=prompt("Price",p.price);
 if(price===null)return;
+let category=prompt("Category (T-Shirts, Oversized, Polos, Hoodies, Custom, Other)",p.category||"Other");
+if(category===null)return;
 let description=prompt("Description",p.description||"");
 if(description===null)return;
-let image=prompt("Paste a new image URL or leave unchanged",p.image||"");
-if(image===null)return;
-p.name=name;p.price=Number(price)||p.price;
-p.description=description;
-if(image)p.image=image;
+p.name=name;p.price=Number(price)||p.price;p.category=category;p.description=description;
 save();renderProducts();renderAdmin();
+}
+
+function changeProductImage(id){
+document.getElementById("editImageFile").click();
+window.currentEditImage=id;
+}
+
+function toggleFeatured(id){
+let p=products.find(x=>x.id===id);
+if(!p)return;
+p.featured=p.featured===false?true:false;
+save();renderAdmin();renderProducts();
 }
 
 function deleteProduct(id){
@@ -470,6 +725,27 @@ orders=orders.filter(o=>o.id!==id);
 save();renderAdmin();
 }
 }
+
+const editImageInput=document.createElement("input");
+editImageInput.type="file";
+editImageInput.accept="image/*";
+editImageInput.id="editImageFile";
+editImageInput.style.display="none";
+document.body.appendChild(editImageInput);
+
+editImageInput.addEventListener("change",async()=>{
+const file=editImageInput.files[0];
+if(!file)return;
+let id=window.currentEditImage;
+let p=products.find(x=>x.id===id);
+if(!p)return;
+try{
+p.image=await compressImage(file);
+save();renderProducts();renderAdmin();
+alert("Product image updated");
+}catch(e){alert("Could not update image");}
+editImageInput.value="";
+});
 
 renderProducts();
 </script>
