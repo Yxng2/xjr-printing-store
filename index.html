@@ -1,0 +1,299 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>XJR PRINTING | Wear Your Identity</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Arial,sans-serif;background:#fff;color:#111}
+button,input,textarea,select{font:inherit}
+button{cursor:pointer}
+header{background:#111;color:#fff;padding:20px 5%;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:10}
+.logo{font-size:24px;font-weight:900;letter-spacing:2px}
+.logo span{color:#aaa}
+nav{display:flex;gap:20px;align-items:center}
+nav a{color:white;text-decoration:none;font-size:13px}
+nav button{background:white;color:black;border:0;padding:10px 14px;font-weight:bold}
+.hero{min-height:450px;background:#111;color:white;padding:65px 7%;display:flex;flex-direction:column;justify-content:center}
+.hero small{letter-spacing:4px;color:#aaa}
+.hero h1{font-size:clamp(40px,9vw,90px);line-height:.95;margin:22px 0;font-weight:900}
+.hero p{max-width:450px;color:#ccc;line-height:1.7}
+.btn{background:#111;color:white;border:1px solid #111;padding:13px 20px;display:inline-block;text-decoration:none;font-weight:bold}
+.btn.white{background:white;color:black;border-color:white}
+.btn.outline{background:white;color:black}
+.hero .btn{margin-top:25px;width:max-content}
+.section{padding:60px 5%}
+.section-title{display:flex;justify-content:space-between;align-items:center;margin-bottom:30px}
+.section-title h2{font-size:30px}
+.products{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+.product{border:1px solid #eee}
+.product-img{height:230px;background:#f3f3f3;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.product-img img{width:100%;height:100%;object-fit:cover}
+.product-info{padding:15px}
+.product-info h3{font-size:15px;margin-bottom:8px}
+.product-info p{font-weight:bold;margin-bottom:12px}
+.product-info button{width:100%;padding:12px;background:#111;color:white;border:0}
+.tag{font-size:11px;color:#777;letter-spacing:1px}
+.banner{background:#eee;padding:45px 5%;text-align:center}
+.banner h2{font-size:30px;margin-bottom:10px}
+footer{background:#111;color:#fff;padding:40px 5%;line-height:2}
+footer a{color:white}
+.modal{position:fixed;inset:0;background:#0009;z-index:50;display:none;overflow:auto;padding:20px}
+.modal-inner{background:white;max-width:600px;margin:30px auto;padding:25px}
+.modal-inner h2{margin-bottom:20px}
+.modal-inner input,.modal-inner textarea,.modal-inner select{width:100%;padding:12px;border:1px solid #ddd;margin:8px 0}
+.close{float:right;font-size:25px;border:0;background:white}
+#admin{background:#f5f5f5}
+.admin-shortcuts{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:20px 0}
+.admin-shortcuts button{padding:13px 5px;background:#111;color:white;border:0;font-size:12px;font-weight:bold}
+.admin-box{background:white;padding:20px;margin:20px 0}
+.admin-box button{padding:10px;margin:5px;border:0;background:#111;color:white}
+.admin-box input,.admin-box textarea{padding:12px;width:100%;margin:7px 0;border:1px solid #ddd}
+.order-item{border:1px solid #ddd;padding:15px;margin:10px 0;background:white}
+.hidden{display:none!important}
+@media(min-width:700px){
+.products{grid-template-columns:repeat(4,1fr);gap:20px}
+.product-img{height:320px}
+.hero{min-height:550px}
+}
+</style>
+</head>
+<body>
+
+<header>
+<div class="logo">XJR <span>PRINTING</span></div>
+<nav>
+<a href="#shop">SHOP</a>
+<a href="#about">ABOUT</a>
+<button onclick="openCart()">CART (<span id="cartCount">0</span>)</button>
+</nav>
+</header>
+
+<section class="hero">
+<small>XJR PRINTING CLOTHING</small>
+<h1>WEAR YOUR<br>IDENTITY.</h1>
+<p>Style. Identity. Creativity. Discover clothing made to express who you are.</p>
+<a href="#shop" class="btn white">SHOP COLLECTION</a>
+</section>
+
+<section class="section" id="shop">
+<div class="section-title">
+<h2>THE COLLECTION</h2>
+<span class="tag">XJR ORIGINALS</span>
+</div>
+<div class="products" id="productList"></div>
+</section>
+
+<section class="banner" id="about">
+<h2>MADE TO STAND OUT.</h2>
+<p>XJR PRINTING — more than prints, it's an identity.</p>
+</section>
+
+<section class="section">
+<h2>TRACK YOUR ORDER</h2>
+<input id="trackInput" placeholder="Enter your order number" style="padding:13px;width:100%;margin:15px 0;border:1px solid #ddd">
+<button class="btn" onclick="trackOrder()">TRACK ORDER</button>
+<div id="trackResult" style="margin-top:15px"></div>
+</section>
+
+<footer>
+<h2>XJR PRINTING</h2>
+<p>Wear Your Identity.</p>
+<p>Orders and enquiries via WhatsApp.</p>
+<a href="https://wa.me/2347015119367">CHAT WITH US</a>
+<p>© 2026 XJR PRINTING</p>
+<button onclick="adminLogin()" style="margin-top:20px;background:none;border:1px solid #666;color:#aaa;padding:10px">ADMIN</button>
+</footer>
+
+<div class="modal" id="cartModal">
+<div class="modal-inner">
+<button class="close" onclick="closeModal('cartModal')">×</button>
+<h2>YOUR CART</h2>
+<div id="cartItems"></div>
+<p id="cartTotal" style="margin:20px 0;font-weight:bold"></p>
+<input id="customerName" placeholder="Your full name">
+<input id="customerPhone" placeholder="Your phone number">
+<textarea id="customerAddress" placeholder="Delivery address / location"></textarea>
+<textarea id="customerNote" placeholder="Order note (optional)"></textarea>
+<button class="btn" onclick="checkout()" style="width:100%">ORDER VIA WHATSAPP</button>
+</div>
+</div>
+
+<div class="modal" id="adminModal">
+<div class="modal-inner" style="max-width:900px">
+<button class="close" onclick="closeModal('adminModal')">×</button>
+<h2>ADMIN DASHBOARD</h2>
+
+<div class="admin-shortcuts">
+<button onclick="jumpAdmin('addSection')">ADD PRODUCT</button>
+<button onclick="jumpAdmin('ordersSection')">CHECK ORDERS</button>
+<button onclick="jumpAdmin('editSection')">EDIT PRODUCTS</button>
+</div>
+
+<div class="admin-box" id="addSection">
+<h3>ADD PRODUCT</h3>
+<input id="newName" placeholder="Product name">
+<input id="newPrice" type="number" placeholder="Price in NGN">
+<input id="newImage" placeholder="Product image URL">
+<textarea id="newDescription" placeholder="Product description"></textarea>
+<button onclick="addProduct()">ADD PRODUCT</button>
+</div>
+
+<div class="admin-box" id="editSection">
+<h3>EDIT PRODUCTS</h3>
+<div id="adminProducts"></div>
+</div>
+
+<div class="admin-box" id="ordersSection">
+<h3>ORDERS</h3>
+<div id="adminOrders"></div>
+</div>
+</div>
+</div>
+
+<script>
+const WA="2347015119367";
+let products=JSON.parse(localStorage.getItem("xjr_products")||"null")||[
+{id:1,name:"XJR Signature Tee",price:12000,image:"",description:"Classic XJR signature shirt"},
+{id:2,name:"Streetwear Hoodie",price:25000,image:"",description:"Premium everyday hoodie"},
+{id:3,name:"Classic Polo",price:18000,image:"",description:"Clean and comfortable polo"},
+{id:4,name:"Custom Graphic Tee",price:15000,image:"",description:"Custom graphic style"}
+];
+let cart=JSON.parse(localStorage.getItem("xjr_cart")||"[]");
+let orders=JSON.parse(localStorage.getItem("xjr_orders")||"[]");
+
+function save(){
+localStorage.setItem("xjr_products",JSON.stringify(products));
+localStorage.setItem("xjr_cart",JSON.stringify(cart));
+localStorage.setItem("xjr_orders",JSON.stringify(orders));
+}
+function money(n){return "₦"+Number(n).toLocaleString("en-NG")}
+function renderProducts(){
+document.getElementById("productList").innerHTML=products.map(p=>`
+<div class="product">
+<div class="product-img">${p.image?`<img src="${p.image}" alt="${p.name}">`:`<div style="font-size:30px;font-weight:900">XJR</div>`}</div>
+<div class="product-info">
+<div class="tag">XJR COLLECTION</div>
+<h3>${esc(p.name)}</h3>
+<p>${money(p.price)}</p>
+<button onclick="addCart(${p.id})">ADD TO CART</button>
+</div></div>`).join("");
+document.getElementById("cartCount").innerText=cart.reduce((a,b)=>a+b.qty,0);
+}
+function esc(s){
+return String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+}
+function addCart(id){
+let p=products.find(x=>x.id===id);
+if(!p)return;
+let item=cart.find(x=>x.id===id);
+if(item)item.qty++;
+else cart.push({id,qty:1});
+save();renderProducts();
+alert("Added to cart");
+}
+function openCart(){
+renderCart();
+document.getElementById("cartModal").style.display="block";
+}
+function renderCart(){
+document.getElementById("cartItems").innerHTML=cart.map(c=>{
+let p=products.find(x=>x.id===c.id);
+if(!p)return "";
+return `<div style="padding:10px;border-bottom:1px solid #ddd">
+${esc(p.name)} × ${c.qty} — ${money(p.price*c.qty)}
+<button onclick="removeCart(${c.id})" style="margin-left:10px">REMOVE</button>
+</div>`;
+}).join("");
+document.getElementById("cartTotal").innerText="TOTAL: "+money(cart.reduce((a,c)=>a+(products.find(p=>p.id===c.id)?.price||0)*c.qty,0));
+}
+function removeCart(id){
+cart=cart.filter(c=>c.id!==id);save();renderCart();renderProducts();
+}
+function checkout(){
+if(!cart.length)return alert("Your cart is empty");
+let name=document.getElementById("customerName").value.trim();
+let phone=document.getElementById("customerPhone").value.trim();
+let address=document.getElementById("customerAddress").value.trim();
+let note=document.getElementById("customerNote").value.trim();
+if(!name||!phone||!address)return alert("Please enter your name, phone and delivery address");
+let total=cart.reduce((a,c)=>a+(products.find(p=>p.id===c.id)?.price||0)*c.qty,0);
+let id="XJR"+Date.now().toString().slice(-7);
+let order={id,name,phone,address,note,total,items:cart.map(c=>({name:products.find(p=>p.id===c.id)?.name,qty:c.qty})),status:"Order received",date:new Date().toLocaleString()};
+orders.push(order);save();
+let msg=`XJR PRINTING ORDER\nOrder ID: ${id}\nName: ${name}\nPhone: ${phone}\nAddress: ${address}\n\nItems:\n${cart.map(c=>`${products.find(p=>p.id===c.id)?.name} x${c.qty}`).join("\n")}\n\nTotal: ${money(total)}\nNote: ${note}`;
+window.open("https://wa.me/"+WA+"?text="+encodeURIComponent(msg),"_blank");
+cart=[];save();renderProducts();closeModal("cartModal");
+alert("Order saved on this device. Send the WhatsApp message to confirm.");
+}
+function trackOrder(){
+let id=document.getElementById("trackInput").value.trim().toUpperCase();
+let o=orders.find(x=>x.id.toUpperCase()===id);
+document.getElementById("trackResult").innerHTML=o?`<div class="order-item"><b>${esc(o.id)}</b><p>Status: ${esc(o.status)}</p><p>${esc(o.date)}</p></div>`:"Order not found on this device.";
+}
+function closeModal(id){document.getElementById(id).style.display="none"}
+function adminLogin(){
+let pw=prompt("Enter admin password");
+if(pw==="XJR2026"){
+renderAdmin();document.getElementById("adminModal").style.display="block";
+}else if(pw!==null)alert("Incorrect password");
+}
+function jumpAdmin(id){document.getElementById(id).scrollIntoView({behavior:"smooth"})}
+function renderAdmin(){
+document.getElementById("adminProducts").innerHTML=products.map(p=>`
+<div style="border-bottom:1px solid #ddd;padding:15px">
+<strong>${esc(p.name)}</strong> — ${money(p.price)}
+<br><button onclick="editProduct(${p.id})">EDIT</button>
+<button onclick="deleteProduct(${p.id})">DELETE</button>
+</div>`).join("");
+document.getElementById("adminOrders").innerHTML=orders.slice().reverse().map(o=>`
+<div class="order-item">
+<b>${esc(o.id)}</b> | ${esc(o.name)} | ${money(o.total)}
+<p>${esc(o.phone)} — ${esc(o.address)}</p>
+<p>Status: ${esc(o.status)}</p>
+<p>${o.items.map(i=>esc(i.name)+" ×"+i.qty).join(", ")}</p>
+<button onclick="updateOrder('${o.id}')">UPDATE STATUS</button>
+<button onclick="deleteOrder('${o.id}')">DELETE</button>
+</div>`).join("")||"No orders yet.";
+}
+function addProduct(){
+let name=document.getElementById("newName").value.trim();
+let price=Number(document.getElementById("newPrice").value);
+if(!name||price<=0)return alert("Enter product name and price");
+products.push({id:Date.now(),name,price,image:document.getElementById("newImage").value.trim(),description:document.getElementById("newDescription").value.trim()});
+save();renderProducts();renderAdmin();
+document.getElementById("newName").value="";
+document.getElementById("newPrice").value="";
+document.getElementById("newImage").value="";
+document.getElementById("newDescription").value="";
+alert("Product added");
+}
+function editProduct(id){
+let p=products.find(x=>x.id===id);
+let name=prompt("Product name",p.name);if(name===null)return;
+let price=prompt("Price",p.price);if(price===null)return;
+let image=prompt("Image URL",p.image||"");if(image===null)return;
+p.name=name;p.price=Number(price)||p.price;p.image=image;
+save();renderProducts();renderAdmin();
+}
+function deleteProduct(id){
+if(confirm("Delete this product?")){
+products=products.filter(p=>p.id!==id);save();renderProducts();renderAdmin();
+}
+}
+function updateOrder(id){
+let o=orders.find(x=>x.id===id);
+let s=prompt("New order status",o.status);
+if(s!==null){o.status=s;save();renderAdmin();}
+}
+function deleteOrder(id){
+if(confirm("Delete order?")){
+orders=orders.filter(o=>o.id!==id);save();renderAdmin();
+}
+}
+renderProducts();
+</script>
+</body>
+</html>
