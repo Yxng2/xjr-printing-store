@@ -369,10 +369,12 @@ let items=cart.map(c=>{let p=products.find(x=>x.id===c.id);return {id:c.id,name:
 let total=items.reduce((a,i)=>a+i.priceSnapshot*i.qty,0);
 let cost=items.reduce((a,i)=>a+i.costSnapshot*i.qty,0);
 let o={id,name,phone,address,note,total,cost,profitSnapshot:total-cost,items,status:"Pending",date:new Date().toLocaleString(),profitCounted:false};
+// Save to Supabase first; only treat the order as created after cloud insert succeeds.
+try{await saveCloudOrder(o);}catch(e){console.error("Supabase order insert failed",e);showToast("Order not saved","Cloud saving failed. Please try again later.");alert("Your order could not be saved to the online database. Please try again.\n\nError: "+(e.message||e));return;}
 orders.push(o);save();
 let msg=`XJR PRINTING ORDER\nOrder ID: ${id}\nCustomer: ${name}\nPhone: ${phone}\nAddress: ${address}\nItems:\n${items.map(i=>i.name+" ×"+i.qty+" — "+money(i.priceSnapshot*i.qty)).join("\n")}\nTotal: ${money(total)}\nNote: ${note}`;
 window.open("https://wa.me/"+WA+"?text="+encodeURIComponent(msg),"_blank");
-cart=[];save();renderProducts();closeModal("cartModal");showToast("Order created","Order "+id+" · send the WhatsApp message to confirm");
+cart=[];save();renderProducts();closeModal("cartModal");showToast("Order created","Order "+id+" · saved online · send the WhatsApp message to confirm");
 }
 async function trackOrder(){
  let id=document.getElementById("trackInput").value.trim().toUpperCase();if(!id)return;
