@@ -305,7 +305,12 @@ nav a{font-size:9px}
 </div>
 </div>
 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
+// XJR PRINTING Supabase connection (publishable key is safe for browser use; RLS protects data)
+const SUPABASE_URL = "https://koblumxnrdyaomseatgx.supabase.co";
+const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_4cZbDc0dAXFq6NZnlGui1g_27-liQzw";
+const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY);
 const WA="2347015119367";
 let products=JSON.parse(localStorage.getItem("xjr_products")||"null")||[
 {id:1,name:"The Essential Tee",price:8500,cost:5000,category:"T-Shirts",image:"https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=700&q=80"},
@@ -317,6 +322,16 @@ let cart=JSON.parse(localStorage.getItem("xjr_cart")||"[]");
 let orders=JSON.parse(localStorage.getItem("xjr_orders")||"[]");
 let imgData="";
 function save(){localStorage.setItem("xjr_products",JSON.stringify(products));localStorage.setItem("xjr_cart",JSON.stringify(cart));localStorage.setItem("xjr_orders",JSON.stringify(orders))}
+async function loadCloudProducts(){
+ try{const {data,error}=await supabaseClient.from('products').select('*').eq('active',true).order('created_at',{ascending:false});
+ if(error)throw error;
+ if(data&&data.length){products=data.map(p=>({id:p.id,name:p.name,price:Number(p.price),cost:Number(p.cost||0),category:p.category||'Other',desc:p.description||'',image:p.image_url||''}));save();renderProducts();}
+ }catch(e){console.warn('Cloud product load unavailable; using locally saved products.',e.message||e)}
+}
+async function saveCloudOrder(order){
+ const payload={order_id:order.id,customer_name:order.name,phone:order.phone,address:order.address,note:order.note,total:order.total,cost:order.cost,profit_snapshot:order.profitSnapshot,items:order.items,status:order.status,order_date:order.date};
+ const {error}=await supabaseClient.from('orders').insert(payload);if(error)throw error;
+}
 function money(n){return "₦"+Number(n||0).toLocaleString("en-NG")}
 function esc(s){return String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
 
@@ -345,7 +360,7 @@ const total=cart.reduce((a,c)=>a+(products.find(p=>p.id===c.id)?.price||0)*c.qty
 document.getElementById("cartTotal").innerHTML=cart.length?`<div class="carttotalbox"><div class="totalrow"><span>Subtotal</span><span>${money(total)}</span></div><small>Delivery charges, if any, will be confirmed before fulfilment.</small></div>`:"";
 document.querySelectorAll("#cartModal input,#cartModal textarea,#cartModal .checkoutbtn").forEach(x=>x.style.display=cart.length?"":"none")}
 function removeCart(id){cart=cart.filter(x=>x.id!==id);save();renderCart();renderProducts();showToast("Item removed","Your cart has been updated")}
-function checkout(){
+async function checkout(){
 if(!cart.length){showToast("Your cart is empty","Add products before checkout");return;}
 let name=document.getElementById("custName").value.trim(),phone=document.getElementById("custPhone").value.trim(),address=document.getElementById("custAddress").value.trim(),note=document.getElementById("custNote").value.trim();
 if(!name||!phone||!address){showToast("Complete your details","Name, phone and delivery address are required");return;}
@@ -359,11 +374,15 @@ let msg=`XJR PRINTING ORDER\nOrder ID: ${id}\nCustomer: ${name}\nPhone: ${phone}
 window.open("https://wa.me/"+WA+"?text="+encodeURIComponent(msg),"_blank");
 cart=[];save();renderProducts();closeModal("cartModal");showToast("Order created","Order "+id+" · send the WhatsApp message to confirm");
 }
-function trackOrder(){
-let id=document.getElementById("trackInput").value.trim().toUpperCase(),o=orders.find(x=>x.id.toUpperCase()===id);
-if(!o){document.getElementById("trackResult").innerHTML=`<div class="trackingcard">Order not found in this browser. Online tracking will be enabled after the store database is connected.</div>`;return;}
-const stages=["Pending","Processing","In Transit","Delivered"],idx=stages.indexOf(o.status);
-document.getElementById("trackResult").innerHTML=`<div class="trackingcard"><div class="trackheading">Order ${esc(o.id)}</div><div class="trackmeta">Placed: ${esc(o.date||"")} · Current status: <b>${esc(o.status)}</b></div><div class="trackingsteps">${stages.map((s,i)=>`<div class="trackstep ${i<=idx?"done":""}"><div class="dot">${i<=idx?"✓":i+1}</div>${s}</div>`).join("")}</div>${o.status==="Cancelled"?`<p style="color:#b42318;font-weight:bold">This order has been cancelled.</p>`:`<p style="font-size:12px;color:#666">Status shown here is stored on this browser until online tracking is connected.</p>`}</div>`}
+async function trackOrder(){
+ let id=document.getElementById("trackInput").value.trim().toUpperCase();if(!id)return;
+ let o=orders.find(x=>x.id.toUpperCase()===id);
+ try{const {data,error}=await supabaseClient.rpc('track_xjr_order',{lookup_order_id:id});if(error)throw error;if(data&&data.length){const c=data[0];o={id:c.order_id,name:c.customer_name,date:c.order_date,status:c.status};}}
+ catch(e){console.warn('Online tracking query failed',e.message||e)}
+ if(!o){document.getElementById("trackResult").innerHTML=`<div class="trackingcard">Order not found. Please check the order ID.</div>`;return;}
+ const stages=["Pending","Processing","In Transit","Delivered"],idx=stages.indexOf(o.status);
+ document.getElementById("trackResult").innerHTML=`<div class="trackingcard"><div class="trackheading">Order ${esc(o.id)}</div><div class="trackmeta">Placed: ${esc(o.date||"")} · Current status: <b>${esc(o.status)}</b></div><div class="trackingsteps">${stages.map((s,i)=>`<div class="trackstep ${i<=idx?"done":""}"><div class="dot">${i<=idx?"✓":i+1}</div>${s}</div>`).join("")}</div>${o.status==="Cancelled"?`<p style="color:#b42318;font-weight:bold">This order has been cancelled.</p>`:`<p style="font-size:12px;color:#666">Order status retrieved from XJR PRINTING.</p>`}</div>`}
+
 function closeModal(id){document.getElementById(id).style.display="none"}
 let clicks=0,timer;
 document.getElementById("secretLogo").onclick=()=>{
@@ -457,6 +476,7 @@ orders.forEach(o=>rows.push([o.id,o.name,o.phone,o.status,o.total,o.status==="De
 let blob=new Blob([rows.join("\n")],{type:"text/csv"}),url=URL.createObjectURL(blob),a=document.createElement("a");a.href=url;a.download="XJR-orders-report.csv";a.click();URL.revokeObjectURL(url);
 }
 renderProducts();
+loadCloudProducts();
 </script>
 </body>
 </html>
