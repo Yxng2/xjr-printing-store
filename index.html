@@ -325,7 +325,7 @@ function save(){localStorage.setItem("xjr_products",JSON.stringify(products));lo
 async function loadCloudProducts(){
  try{const {data,error}=await supabaseClient.from('products').select('*').eq('active',true).order('created_at',{ascending:false});
  if(error)throw error;
- if(data&&data.length){products=data.map(p=>({id:p.id,name:p.name,price:Number(p.price),cost:Number(p.cost||0),category:p.category||'Other',desc:p.description||'',image:p.image_url||''}));save();renderProducts();}
+ products=(data||[]).map(p=>({id:p.id,name:p.name,price:Number(p.price),cost:Number(p.cost||0),category:p.category||'Other',desc:p.description||'',image:p.image_url||''}));save();renderProducts();
  }catch(e){console.warn('Cloud product load unavailable; using locally saved products.',e.message||e)}
 }
 async function saveCloudOrder(order){
@@ -391,7 +391,16 @@ document.getElementById("secretLogo").onclick=()=>{
 clicks++;clearTimeout(timer);timer=setTimeout(()=>clicks=0,2000);
 if(clicks>=5){clicks=0;adminLogin()}
 };
-function adminLogin(){let pw=prompt("Admin password");if(pw==="XJR2026"){openAdmin()}else if(pw!==null)alert("Wrong password")}
+async function adminLogin(){
+ const email=prompt("Admin email");if(!email)return;
+ const password=prompt("Admin password");if(!password)return;
+ try{
+  const {data,error}=await supabaseClient.auth.signInWithPassword({email,password});if(error)throw error;
+  const {data:allowed,error:checkError}=await supabaseClient.rpc('is_xjr_admin');if(checkError)throw checkError;
+  if(!allowed){await supabaseClient.auth.signOut();alert("This account is not authorized as XJR PRINTING admin.");return;}
+  await loadCloudOrders();openAdmin();
+ }catch(e){alert("Admin sign-in failed: "+(e.message||e));}
+}
 function openAdmin(){renderAdmin();document.getElementById("adminModal").style.display="block";showAdmin("dash")}
 function showAdmin(id){
 document.querySelectorAll(".adminsection").forEach(x=>x.classList.add("hidden"));
@@ -405,38 +414,41 @@ renderAdmin();
 }
 function jumpTo(id){document.getElementById(id)?.scrollIntoView({behavior:"smooth"})}
 
-function addProduct(){
+async function addProduct(){
 let name=document.getElementById("newName").value.trim(),price=Number(document.getElementById("newPrice").value),cost=Number(document.getElementById("newCost").value),category=document.getElementById("newCategory").value,desc=document.getElementById("newDesc").value.trim();
 if(!name||price<=0)return alert("Enter name and selling price");
-products.push({id:Date.now(),name,price,cost,category,desc,image:imgData});
-save();imgData="";document.getElementById("imagePreview").innerHTML="";
-["newName","newPrice","newCost","newDesc","newFile"].forEach(id=>document.getElementById(id).value="");
-renderProducts();renderAdmin();alert("Product added");
+try{const {error}=await supabaseClient.from('products').insert({name,price,cost,category,description:desc,image_url:imgData||null,active:true});if(error)throw error;
+await loadCloudProducts();imgData="";document.getElementById("imagePreview").innerHTML="";["newName","newPrice","newCost","newDesc","newFile"].forEach(id=>document.getElementById(id).value="");renderProducts();renderAdmin();alert("Product added online");
+}catch(e){alert("Product could not be saved online: "+(e.message||e));}
 }
 document.getElementById("newFile").addEventListener("change",async e=>{
 let f=e.target.files[0];if(!f)return;
 try{imgData=await compress(f);document.getElementById("imagePreview").innerHTML=`<img class="preview" src="${imgData}">`}catch{alert("Image error")}
 });
 function compress(file){return new Promise((resolve,reject)=>{let r=new FileReader();r.onerror=reject;r.onload=()=>{let i=new Image();i.onerror=reject;i.onload=()=>{let w=i.width,h=i.height,m=1000;if(w>m||h>m){let z=Math.min(m/w,m/h);w*=z;h*=z}let c=document.createElement("canvas");c.width=w;c.height=h;c.getContext("2d").drawImage(i,0,0,w,h);resolve(c.toDataURL("image/jpeg",.72))};i.src=r.result};r.readAsDataURL(file)})}
-function editProduct(id){
+async function editProduct(id){
 let p=products.find(x=>x.id===id);if(!p)return;
 let n=prompt("Product name",p.name);if(n===null)return;
 let price=prompt("Selling price",p.price);if(price===null)return;
 let cost=prompt("Cost price",p.cost||0);if(cost===null)return;
 let cat=prompt("Category",p.category);if(cat===null)return;
-p.name=n;p.price=Number(price)||p.price;p.cost=Number(cost)||0;p.category=cat;save();renderAdmin();renderProducts();
+let desc=prompt("Description",p.desc||"");if(desc===null)return;
+try{const {error}=await supabaseClient.from('products').update({name:n,price:Number(price)||p.price,cost:Number(cost)||0,category:cat,description:desc}).eq('id',id);if(error)throw error;
+await loadCloudProducts();renderAdmin();renderProducts();
+}catch(e){alert("Product update failed: "+(e.message||e));}
 }
-function deleteProduct(id){if(confirm("Delete product?")){products=products.filter(p=>p.id!==id);save();renderAdmin();renderProducts()}}
-function changeImage(id){let input=document.createElement("input");input.type="file";input.accept="image/*";input.onchange=async()=>{if(input.files[0]){let p=products.find(x=>x.id===id);p.image=await compress(input.files[0]);save();renderAdmin();renderProducts()}};input.click()}
-function setStatus(id,status){
+async function deleteProduct(id){if(!confirm("Delete product permanently from the online store?"))return;try{const {error}=await supabaseClient.from('products').delete().eq('id',id);if(error)throw error;await loadCloudProducts();renderAdmin();renderProducts();}catch(e){alert("Delete failed: "+(e.message||e));}}
+function changeImage(id){let input=document.createElement("input");input.type="file";input.accept="image/*";input.onchange=async()=>{if(input.files[0]){try{let img=await compress(input.files[0]);const {error}=await supabaseClient.from('products').update({image_url:img}).eq('id',id);if(error)throw error;await loadCloudProducts();renderAdmin();renderProducts();}catch(e){alert("Image update failed: "+(e.message||e));}}};input.click()}
+async function loadCloudOrders(){
+ const {data,error}=await supabaseClient.from('orders').select('*').order('created_at',{ascending:false});if(error)throw error;
+ orders=(data||[]).map(o=>({id:o.order_id,name:o.customer_name,phone:o.phone,address:o.address,note:o.note,total:Number(o.total||0),cost:Number(o.cost||0),profitSnapshot:Number(o.profit_snapshot||0),items:o.items||[],status:o.status||'Pending',date:o.order_date||o.created_at,profitCounted:o.status==='Delivered'}));save();renderAdmin();
+}
+async function setStatus(id,status){
 let o=orders.find(x=>x.id===id);if(!o)return;
-if(status==="Delivered"&&o.status!=="Delivered"){o.profitCounted=true}
-if(o.status==="Delivered"&&status!=="Delivered"){o.profitCounted=false}
-o.status=status;
-save();renderAdmin();showToast("Order updated",o.id+" is now "+status);
+try{const {error}=await supabaseClient.from('orders').update({status}).eq('order_id',id);if(error)throw error;o.status=status;o.profitCounted=status==='Delivered';save();renderAdmin();showToast("Order updated",o.id+" is now "+status);}catch(e){alert("Status update failed: "+(e.message||e));}
 }
-function orderAction(id){let o=orders.find(x=>x.id===id);if(!o)return;let s=prompt("Set order status: Pending, Processing, In Transit, Delivered, Cancelled",o.status);if(!s)return;let allowed=["Pending","Processing","In Transit","Delivered","Cancelled"];if(!allowed.includes(s))return alert("Use one of the listed statuses");setStatus(id,s)}
-function deleteOrder(id){if(confirm("Delete this order?")){orders=orders.filter(x=>x.id!==id);save();renderAdmin()}}
+async function orderAction(id){let o=orders.find(x=>x.id===id);if(!o)return;let s=prompt("Set order status: Pending, Processing, In Transit, Delivered, Cancelled",o.status);if(!s)return;let allowed=["Pending","Processing","In Transit","Delivered","Cancelled"];if(!allowed.includes(s))return alert("Use one of the listed statuses");await setStatus(id,s)}
+async function deleteOrder(id){if(confirm("Delete this order from the online database?")){try{const {error}=await supabaseClient.from('orders').delete().eq('order_id',id);if(error)throw error;orders=orders.filter(x=>x.id!==id);save();renderAdmin();}catch(e){alert("Order deletion failed: "+(e.message||e));}}}
 function renderOrders(){
 let search=((document.getElementById("dashSearch")?.value||"")+(document.getElementById("orderSearch")?.value||"")).toLowerCase();
 let filt=document.getElementById("orderFilter")?.value||"All";
